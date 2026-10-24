@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Fx>net11.0</Fx>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
+    <ArtifactsPath>$(MSBuildThisFileDirectory).artifacts/</ArtifactsPath>
+  </PropertyGroup>
+</Project>

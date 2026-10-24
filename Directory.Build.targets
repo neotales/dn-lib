@@ -1,0 +1,42 @@
+<Project>
+  <PropertyGroup>
+    <Company>Neotales</Company>
+    <Authors>Neotales</Authors>
+    <Copyright>Copyright (c) Neotales</Copyright>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+    <PackageId>$(AssemblyName)</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotesFile>CHANGELOG.md</PackageReleaseNotesFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageOutputPath>$(MSBuildThisFileDirectory).artifacts/packages/</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <OutputType>Exe</OutputType>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
+    <PackageReference Include="MinVer" PrivateAssets="all" />
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <None Include="CHANGELOG.md" Pack="true" PackagePath="/" />
+    <None Include="icon.png" Pack="true" PackagePath="/" />
+    <None Include="THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="/" Condition="Exists('THIRD-PARTY-NOTICES.md')" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <Using Include="Xunit" />
+    <None Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('xunit.runner.json')" />
+  </ItemGroup>
+</Project>

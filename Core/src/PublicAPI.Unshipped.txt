@@ -1,0 +1,777 @@
+#nullable enable
+Neotales.Collections.Generic.EmptyInputs
+Neotales.Collections.Generic.EmptyInputs.Add(string! key, object? value) -> void
+Neotales.Collections.Generic.EmptyInputs.EmptyInputs() -> void
+Neotales.Collections.Generic.EmptyOutputs
+Neotales.Collections.Generic.EmptyOutputs.Add(string! key, object? value) -> void
+Neotales.Collections.Generic.EmptyOutputs.EmptyOutputs() -> void
+Neotales.Collections.Generic.Inputs
+Neotales.Collections.Generic.Inputs.Inputs() -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Inputs.Inputs(int capacity) -> void
+Neotales.Collections.Generic.Inputs.Inputs(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map
+Neotales.Collections.Generic.Map.Map() -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map.Map(int capacity) -> void
+Neotales.Collections.Generic.Map.Map(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>
+Neotales.Collections.Generic.Map<TKey, TValue>.Add((TKey, TValue) item) -> Neotales.Collections.Generic.Map<TKey, TValue>!
+Neotales.Collections.Generic.Map<TKey, TValue>.AddRange(System.Collections.Generic.IEnumerable<(TKey, TValue)>! items) -> Neotales.Collections.Generic.Map<TKey, TValue>!
+Neotales.Collections.Generic.Map<TKey, TValue>.Map() -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IDictionary<TKey, TValue>! dictionary) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IDictionary<TKey, TValue>! dictionary, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IEnumerable<(TKey, TValue)>! collection) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! collection) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! collection, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(int capacity) -> void
+Neotales.Collections.Generic.Map<TKey, TValue>.Map(int capacity, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.Map<TValue>
+Neotales.Collections.Generic.Map<TValue>.Map() -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IDictionary<string!, TValue>! dictionary) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IDictionary<string!, TValue>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IEnumerable<(string!, TValue)>! collection) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IEnumerable<(string!, TValue)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, TValue>>! collection) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, TValue>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(int capacity) -> void
+Neotales.Collections.Generic.Map<TValue>.Map(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap
+Neotales.Collections.Generic.OrderedMap.OrderedMap() -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(int capacity) -> void
+Neotales.Collections.Generic.OrderedMap.OrderedMap(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.Add((TKey, TValue) item) -> Neotales.Collections.Generic.OrderedMap<TKey, TValue>!
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.AddRange(System.Collections.Generic.IEnumerable<(TKey, TValue)>! items) -> Neotales.Collections.Generic.OrderedMap<TKey, TValue>!
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap() -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IDictionary<TKey, TValue>! dictionary) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IDictionary<TKey, TValue>! dictionary, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IEnumerable<(TKey, TValue)>! collection) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! collection) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! collection, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(int capacity) -> void
+Neotales.Collections.Generic.OrderedMap<TKey, TValue>.OrderedMap(int capacity, System.Collections.Generic.IEqualityComparer<TKey>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap() -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IDictionary<string!, TValue>! dictionary) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IDictionary<string!, TValue>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IEnumerable<(string!, TValue)>! collection) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IEnumerable<(string!, TValue)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, TValue>>! collection) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, TValue>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(int capacity) -> void
+Neotales.Collections.Generic.OrderedMap<TValue>.OrderedMap(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedStringMap
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap() -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IDictionary<string!, string?>! dictionary) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IDictionary<string!, string?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEnumerable<(string!, string?)>! collection) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEnumerable<(string!, string?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string?>>! collection) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(int capacity) -> void
+Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Outputs
+Neotales.Collections.Generic.Outputs.Outputs() -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.Outputs.Outputs(int capacity) -> void
+Neotales.Collections.Generic.Outputs.Outputs(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.StringList
+Neotales.Collections.Generic.StringList.ContainsFold(string! item) -> bool
+Neotales.Collections.Generic.StringList.IndexOfFold(string! item) -> int
+Neotales.Collections.Generic.StringList.StringList() -> void
+Neotales.Collections.Generic.StringList.StringList(System.Collections.Generic.IEnumerable<string!>! collection) -> void
+Neotales.Collections.Generic.StringList.StringList(System.Collections.Specialized.StringCollection! collection) -> void
+Neotales.Collections.Generic.StringList.StringList(System.Collections.Specialized.StringEnumerator! enumerator) -> void
+Neotales.Collections.Generic.StringList.StringList(int capacity) -> void
+Neotales.Collections.Generic.StringMap
+Neotales.Collections.Generic.StringMap.StringMap() -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IDictionary<string!, string?>! dictionary) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IDictionary<string!, string?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IEnumerable<(string!, string?)>! collection) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IEnumerable<(string!, string?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string?>>! collection) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Collections.Generic.StringMap.StringMap(System.Collections.Specialized.NameValueCollection! collection) -> void
+Neotales.Collections.Generic.StringMap.StringMap(int capacity) -> void
+Neotales.Collections.Generic.StringMap.StringMap(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
+Neotales.Env
+Neotales.Env.Keys
+Neotales.EnvExpandOptions
+Neotales.EnvExpandOptions.CommandSubstitution.get -> bool
+Neotales.EnvExpandOptions.CommandSubstitution.set -> void
+Neotales.EnvExpandOptions.EnvExpandOptions() -> void
+Neotales.EnvExpandOptions.GetAllVariables.get -> System.Func<System.Collections.Generic.IDictionary<string!, string!>!>?
+Neotales.EnvExpandOptions.GetAllVariables.set -> void
+Neotales.EnvExpandOptions.GetVariable.get -> System.Func<string!, string?>?
+Neotales.EnvExpandOptions.GetVariable.set -> void
+Neotales.EnvExpandOptions.ResolveCommand.get -> System.Func<string!, string?>?
+Neotales.EnvExpandOptions.ResolveCommand.set -> void
+Neotales.EnvExpandOptions.SetVariable.get -> System.Action<string!, string!>?
+Neotales.EnvExpandOptions.SetVariable.set -> void
+Neotales.EnvExpandOptions.UnixArgsExpansion.get -> bool
+Neotales.EnvExpandOptions.UnixArgsExpansion.set -> void
+Neotales.EnvExpandOptions.UnixAssignment.get -> bool
+Neotales.EnvExpandOptions.UnixAssignment.set -> void
+Neotales.EnvExpandOptions.UnixCustomErrorMessage.get -> bool
+Neotales.EnvExpandOptions.UnixCustomErrorMessage.set -> void
+Neotales.EnvExpandOptions.UseShell.get -> string!
+Neotales.EnvExpandOptions.UseShell.set -> void
+Neotales.EnvExpandOptions.WindowsExpansion.get -> bool
+Neotales.EnvExpandOptions.WindowsExpansion.set -> void
+Neotales.EnvironmentException
+Neotales.EnvironmentException.EnvironmentException() -> void
+Neotales.EnvironmentException.EnvironmentException(string! message) -> void
+Neotales.EnvironmentException.EnvironmentException(string! message, System.Exception! innerException) -> void
+Neotales.Exec.CommandArgs
+Neotales.Exec.CommandArgs.Add(System.ReadOnlySpan<char> item) -> void
+Neotales.Exec.CommandArgs.Add(string! item1, string! item2) -> void
+Neotales.Exec.CommandArgs.Add(string! item1, string! item2, string! item3) -> void
+Neotales.Exec.CommandArgs.Add(string! item1, string! item2, string! item3, string! item4) -> void
+Neotales.Exec.CommandArgs.Add(string! item1, string! item2, string! item3, string! item4, string! item5) -> void
+Neotales.Exec.CommandArgs.CommandArgs() -> void
+Neotales.Exec.CommandArgs.CommandArgs(System.Collections.Generic.IEnumerable<string!>! args) -> void
+Neotales.Exec.CommandArgs.Escape.get -> bool
+Neotales.Exec.CommandArgs.Escape.set -> void
+Neotales.Exec.CommandArgs.Shift() -> string!
+Neotales.Exec.CommandArgs.Unshift(string! item) -> Neotales.Exec.CommandArgs!
+Neotales.Exec.CommandLexer
+Neotales.Exec.CommandToken
+Neotales.Exec.CommandToken.CommandToken() -> void
+Neotales.Exec.CommandToken.CommandToken(string! value, Neotales.Exec.CommandTokenKind kind) -> void
+Neotales.Exec.CommandToken.Kind.get -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandToken.Value.get -> string!
+Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.And = 6 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.Arg = 1 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.ClosureEnd = 11 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.ClosureStart = 10 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.DoubleQuotedArg = 3 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.Invalid = 0 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.Or = 7 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.Pipe = 8 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.SingleQuotedArg = 2 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.StatementEnd = 9 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.SubProcessEnd = 5 -> Neotales.Exec.CommandTokenKind
+Neotales.Exec.CommandTokenKind.SubProcessStart = 4 -> Neotales.Exec.CommandTokenKind
+Neotales.Extras.ArrayExtensions
+Neotales.Extras.ExceptionMembers
+Neotales.Extras.ExceptionMembers.extension(System.ArgumentNullException!)
+Neotales.Extras.SpanExtensions
+Neotales.Extras.StringExtensions
+Neotales.Extras.TaskExtensions
+Neotales.Extras.UnixFileModeMembers
+Neotales.Extras.UnixFileModeMembers.extension(System.IO.UnixFileMode)
+Neotales.IO.DisposableDirectory
+Neotales.IO.DisposableDirectory.DirectoryPath.get -> string!
+Neotales.IO.DisposableDirectory.DisposableDirectory(string! directoryPath) -> void
+Neotales.IO.DisposableDirectory.DisposableDirectory(string! directoryPath, System.Action<Neotales.IO.DisposableDirectory!>! onDispose) -> void
+Neotales.IO.DisposableDirectory.Dispose() -> void
+Neotales.IO.DisposableFile
+Neotales.IO.DisposableFile.DisposableFile(string! filePath) -> void
+Neotales.IO.DisposableFile.DisposableFile(string! filePath, System.Action<Neotales.IO.DisposableFile!>! onDispose) -> void
+Neotales.IO.DisposableFile.Dispose() -> void
+Neotales.IO.DisposableFile.FilePath.get -> string!
+Neotales.IO.Extras.DirectoryMembers
+Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!)
+Neotales.IO.Extras.FileMembers
+Neotales.IO.Extras.FileMembers.extension(System.IO.File!)
+Neotales.IO.Extras.UnixFileModeMembers
+Neotales.IO.Extras.UnixFileModeMembers.extension(System.IO.UnixFileMode)
+Neotales.IO.FileSystemEntryType
+Neotales.IO.FileSystemEntryType.All = 3 -> Neotales.IO.FileSystemEntryType
+Neotales.IO.FileSystemEntryType.Directory = 2 -> Neotales.IO.FileSystemEntryType
+Neotales.IO.FileSystemEntryType.File = 1 -> Neotales.IO.FileSystemEntryType
+Neotales.IO.FileSystemEntryType.SymbolicLink = 3 -> Neotales.IO.FileSystemEntryType
+Neotales.IO.SimpleTeeTextWriter
+Neotales.IO.SimpleTeeTextWriter.SimpleTeeTextWriter(System.IO.TextWriter! writer1, System.IO.TextWriter! writer2, bool leaveWriterOpen1 = false, bool leaveWriterOpen2 = false) -> void
+Neotales.IO.TeeTextWriter
+Neotales.IO.TeeTextWriter.TeeTextWriter(System.Collections.Generic.IEnumerable<(System.IO.TextWriter! writer, bool leaveOpen)>! writers) -> void
+Neotales.IO.TeeTextWriter.TeeTextWriter(System.Collections.Generic.IEnumerable<Neotales.IO.TeeTextWriter!>! writers, bool leaveOpen = false) -> void
+Neotales.IO.TeeTextWriter.TeeTextWriter(bool leaveOpen, params System.IO.TextWriter![]! writers) -> void
+Neotales.IO.TeeTextWriter.TeeTextWriter(params System.IO.TextWriter![]! writers) -> void
+Neotales.IO.UnixFileStatus
+Neotales.IO.UnixFileStatus.AccessTime.get -> long
+Neotales.IO.UnixFileStatus.BirthTime.get -> long
+Neotales.IO.UnixFileStatus.ChangedTime.get -> long
+Neotales.IO.UnixFileStatus.Dev.get -> long
+Neotales.IO.UnixFileStatus.GetGroupName() -> string?
+Neotales.IO.UnixFileStatus.GetUserName() -> string?
+Neotales.IO.UnixFileStatus.GroupId.get -> int
+Neotales.IO.UnixFileStatus.Ino.get -> long
+Neotales.IO.UnixFileStatus.IsDirectory.get -> bool
+Neotales.IO.UnixFileStatus.IsFile.get -> bool
+Neotales.IO.UnixFileStatus.IsSymbolicLink.get -> bool
+Neotales.IO.UnixFileStatus.Mode.get -> int
+Neotales.IO.UnixFileStatus.ModifiedTime.get -> long
+Neotales.IO.UnixFileStatus.Path.get -> string!
+Neotales.IO.UnixFileStatus.Size.get -> long
+Neotales.IO.UnixFileStatus.UnixFileStatus() -> void
+Neotales.IO.UnixFileStatus.UserId.get -> int
+Neotales.Never
+Neotales.Never.Never() -> void
+Neotales.Observer<T>
+Neotales.Observer<T>.Observer(System.Action<T>? onNext, System.Action<System.Exception!>? onError, System.Action? onCompleted) -> void
+Neotales.Observer<T>.OnCompleted() -> void
+Neotales.Observer<T>.OnError(System.Exception! error) -> void
+Neotales.Observer<T>.OnNext(T value) -> void
+Neotales.Options.IOption
+Neotales.Options.IOption.HasNoValue.get -> bool
+Neotales.Options.IOption.HasValue.get -> bool
+Neotales.Options.IOption.Value.get -> object?
+Neotales.Options.None
+Neotales.Options.None.None() -> void
+Neotales.Options.None<T>
+Neotales.Options.None<T>.None() -> void
+Neotales.Options.Option
+Neotales.Options.Option<T>
+Neotales.Options.Option<T>.HasNoValue.get -> bool
+Neotales.Options.Option<T>.HasValue.get -> bool
+Neotales.Options.Option<T>.Inspect(System.Action<T>! inspector) -> Neotales.Options.Option<T>!
+Neotales.Options.Option<T>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Options.Option<T>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
+Neotales.Options.Option<T>.Map<U>(System.Func<T, U>! map, U defaultValue) -> U
+Neotales.Options.Option<T>.Match(System.Func<T, bool>! map) -> bool
+Neotales.Options.Option<T>.Option() -> void
+Neotales.Options.Option<T>.Option(Neotales.Options.Some<T> some) -> void
+Neotales.Options.Option<T>.Option(T value) -> void
+Neotales.Options.Option<T>.Or(System.Func<T>! valueFactory) -> Neotales.Options.Option<T>!
+Neotales.Options.Option<T>.Or(T value) -> Neotales.Options.Option<T>!
+Neotales.Options.Option<T>.ToResult() -> Neotales.Results.Result<T>!
+Neotales.Options.Option<T>.TryGetValue(out T value) -> bool
+Neotales.Options.Option<T>.Value.get -> object?
+Neotales.Options.Option<T>.ValueOrDefault() -> T
+Neotales.Options.Option<T>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Options.Option<T>.ValueOrDefault(T defaultValue) -> T
+Neotales.Options.Option<T>.ValueOrThrow() -> T
+Neotales.Options.Option<T>.ValueOrThrow(System.Func<System.Exception!>! exceptionFactory) -> T
+Neotales.Options.Option<T>.ValueOrThrow(System.Func<string!>! messageFactory) -> T
+Neotales.Options.Option<T>.ValueOrThrow(string! message) -> T
+Neotales.Options.OptionException
+Neotales.Options.OptionException.OptionException() -> void
+Neotales.Options.OptionException.OptionException(string! message) -> void
+Neotales.Options.OptionException.OptionException(string! message, System.Exception! innerException) -> void
+Neotales.Options.OptionException.OptionException(string! message, System.Exception! innerException, object? value) -> void
+Neotales.Options.OptionException.OptionException(string! message, object? value) -> void
+Neotales.Options.OptionException.Value.get -> object?
+Neotales.Options.Some<T>
+Neotales.Options.Some<T>.Some() -> void
+Neotales.Options.Some<T>.Some(T value) -> void
+Neotales.Options.Some<T>.Value.get -> T
+Neotales.Options.ValueOption
+Neotales.Options.ValueOption<T>
+Neotales.Options.ValueOption<T>.Equals(Neotales.Options.ValueOption<T> other) -> bool
+Neotales.Options.ValueOption<T>.Equals(T? other) -> bool
+Neotales.Options.ValueOption<T>.HasNoValue.get -> bool
+Neotales.Options.ValueOption<T>.HasValue.get -> bool
+Neotales.Options.ValueOption<T>.Inspect(System.Action<T>! inspector) -> Neotales.Options.ValueOption<T>
+Neotales.Options.ValueOption<T>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Options.ValueOption<T>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
+Neotales.Options.ValueOption<T>.Map<U>(System.Func<T, U>! map, U defaultValue) -> U
+Neotales.Options.ValueOption<T>.Match(System.Func<T, bool>! map) -> bool
+Neotales.Options.ValueOption<T>.Or(T value) -> Neotales.Options.ValueOption<T>
+Neotales.Options.ValueOption<T>.TryGetValue(out T value) -> bool
+Neotales.Options.ValueOption<T>.Value.get -> object?
+Neotales.Options.ValueOption<T>.ValueOption() -> void
+Neotales.Options.ValueOption<T>.ValueOption(T value) -> void
+Neotales.Options.ValueOption<T>.ValueOrDefault() -> T
+Neotales.Options.ValueOption<T>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Options.ValueOption<T>.ValueOrDefault(T defaultValue) -> T
+Neotales.Options.ValueOption<T>.ValueOrThrow() -> T
+Neotales.Options.ValueOption<T>.ValueOrThrow(System.Func<System.Exception!>! exceptionFactory) -> T
+Neotales.Options.ValueOption<T>.ValueOrThrow(System.Func<string!>! messageFactory) -> T
+Neotales.Options.ValueOption<T>.ValueOrThrow(string! message) -> T
+Neotales.ResourceNotFoundException
+Neotales.ResourceNotFoundException.ResourceName.get -> string?
+Neotales.ResourceNotFoundException.ResourceNotFoundException() -> void
+Neotales.ResourceNotFoundException.ResourceNotFoundException(string! message) -> void
+Neotales.ResourceNotFoundException.ResourceNotFoundException(string! message, System.Exception! innerException) -> void
+Neotales.ResourceNotFoundException.ResourceNotFoundException(string! resourceName, string! resourceType) -> void
+Neotales.ResourceNotFoundException.ResourceType.get -> string?
+Neotales.Results.Error
+Neotales.Results.Error.Cause.get -> Neotales.Results.IError?
+Neotales.Results.Error.Code.get -> string?
+Neotales.Results.Error.Error() -> void
+Neotales.Results.Error.Error(Neotales.Results.IError! cause, string? message = null, string? code = null) -> void
+Neotales.Results.Error.Error(System.Exception! exception, string? message = null, string? code = null) -> void
+Neotales.Results.Error.Error(string! message, string? code = null) -> void
+Neotales.Results.Error.Exception.get -> System.Exception?
+Neotales.Results.Error.Message.get -> string!
+Neotales.Results.Error.ToException() -> System.Exception!
+Neotales.Results.Error<T>
+Neotales.Results.Error<T>.Cause.get -> Neotales.Results.IError?
+Neotales.Results.Error<T>.Code.get -> string?
+Neotales.Results.Error<T>.Error() -> void
+Neotales.Results.Error<T>.Error(T value, Neotales.Results.IError! cause, string? message = null, string? code = null) -> void
+Neotales.Results.Error<T>.Error(T value, System.Exception! exception, string? message = null, string? code = null) -> void
+Neotales.Results.Error<T>.Error(T value, string? message = null, string? code = null) -> void
+Neotales.Results.Error<T>.Exception.get -> System.Exception?
+Neotales.Results.Error<T>.Message.get -> string!
+Neotales.Results.Error<T>.ToException() -> System.Exception!
+Neotales.Results.Error<T>.Value.get -> T
+Neotales.Results.IError
+Neotales.Results.IError.Cause.get -> Neotales.Results.IError?
+Neotales.Results.IError.Code.get -> string?
+Neotales.Results.IError.Exception.get -> System.Exception?
+Neotales.Results.IError.Message.get -> string!
+Neotales.Results.IError<T>
+Neotales.Results.IError<T>.Value.get -> T
+Neotales.Results.IResult
+Neotales.Results.IResult.ErrorOrDefault() -> Neotales.Results.IError!
+Neotales.Results.IResult.ErrorOrDefault(System.Func<Neotales.Results.IError!>! defaultValueFactory) -> Neotales.Results.IError!
+Neotales.Results.IResult.HasError.get -> bool
+Neotales.Results.IResult.HasValue.get -> bool
+Neotales.Results.IResult<T, E>
+Neotales.Results.IResult<T, E>.ErrorOrDefault() -> Neotales.Results.IError<E>!
+Neotales.Results.IResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.IError<E>!>! defaultValueFactory) -> Neotales.Results.IError<E>!
+Neotales.Results.IResult<T, E>.TryGetError(out Neotales.Results.IError<E>! error) -> bool
+Neotales.Results.IResult<T, E>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.IResult<T>
+Neotales.Results.IResult<T>.TryGetError(out Neotales.Results.IError! error) -> bool
+Neotales.Results.IResult<T>.TryGetValue(out T value) -> bool
+Neotales.Results.IResult<T>.ValueOrDefault() -> T
+Neotales.Results.IResult<T>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Results.Result
+Neotales.Results.Result.ErrorOrDefault() -> Neotales.Results.IError!
+Neotales.Results.Result.ErrorOrDefault(Neotales.Results.Error defaultValue) -> Neotales.Results.Error
+Neotales.Results.Result.ErrorOrDefault(System.Func<Neotales.Results.IError!>! defaultValueFactory) -> Neotales.Results.IError!
+Neotales.Results.Result.HasError.get -> bool
+Neotales.Results.Result.HasValue.get -> bool
+Neotales.Results.Result.Map<U>(System.Func<U>! map) -> U
+Neotales.Results.Result.MapEither<U>(System.Func<U>! map, System.Func<Neotales.Results.Error, U>! errorMap) -> U
+Neotales.Results.Result.MapError<U>(System.Func<Neotales.Results.Error, U>! map) -> U
+Neotales.Results.Result.MapError<U>(System.Func<Neotales.Results.Error, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result.MapResult<U, E>(System.Func<U>! mapValue, System.Func<Neotales.Results.Error, E>! mapError) -> Neotales.Results.Result<U, E>!
+Neotales.Results.Result.Result() -> void
+Neotales.Results.Result.Result(Neotales.Results.Error error) -> void
+Neotales.Results.Result.TryGetError(out Neotales.Results.Error error) -> bool
+Neotales.Results.Result.Value.get -> object?
+Neotales.Results.Result<T, E>
+Neotales.Results.Result<T, E>.ErrorOrDefault() -> Neotales.Results.Error<E>
+Neotales.Results.Result<T, E>.ErrorOrDefault(System.Func<E>! defaultValueFactory) -> Neotales.Results.Error<E>
+Neotales.Results.Result<T, E>.ErrorOrDefault(System.Func<Neotales.Results.Error<E>>! defaultValueFactory) -> Neotales.Results.Error<E>
+Neotales.Results.Result<T, E>.HasError.get -> bool
+Neotales.Results.Result<T, E>.HasValue.get -> bool
+Neotales.Results.Result<T, E>.Inspect(System.Action<T>! inspector) -> void
+Neotales.Results.Result<T, E>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Results.Result<T, E>.Map<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error<E>, U>! factory) -> U
+Neotales.Results.Result<T, E>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result<T, E>.MapEither<U>(System.Func<T, U>! map, System.Func<E, U>! errorMap) -> U
+Neotales.Results.Result<T, E>.MapError<U>(System.Func<E, U>! map) -> U
+Neotales.Results.Result<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map) -> U
+Neotales.Results.Result<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result<T, E>.MapResult<U, V>(System.Func<T, U>! mapValue, System.Func<Neotales.Results.Error<E>, Neotales.Results.Error<V>>! mapError) -> Neotales.Results.Result<U, V>!
+Neotales.Results.Result<T, E>.MapResult<U>(System.Func<T, U>! mapValue) -> Neotales.Results.Result<U, E>!
+Neotales.Results.Result<T, E>.Match(System.Func<T, bool>! map) -> bool
+Neotales.Results.Result<T, E>.Match(System.Func<T, bool>! map, System.Func<E, bool>! errorMap) -> bool
+Neotales.Results.Result<T, E>.Match(System.Func<T, bool>! map, System.Func<Neotales.Results.Error<E>, bool>! errorMap) -> bool
+Neotales.Results.Result<T, E>.Or(System.Func<T>! valueFactory) -> Neotales.Results.Result<T, E>!
+Neotales.Results.Result<T, E>.Or(T value) -> Neotales.Results.Result<T, E>!
+Neotales.Results.Result<T, E>.Result(Neotales.Results.Error<E> error) -> void
+Neotales.Results.Result<T, E>.Result(T value) -> void
+Neotales.Results.Result<T, E>.TryGetError(out Neotales.Results.Error<E> error) -> bool
+Neotales.Results.Result<T, E>.TryGetValue(out T value) -> bool
+Neotales.Results.Result<T, E>.Value.get -> object?
+Neotales.Results.Result<T, E>.ValueOrDefault() -> T
+Neotales.Results.Result<T, E>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Results.Result<T, E>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.Result<T, E>.ValueOrThrow() -> T
+Neotales.Results.Result<T>
+Neotales.Results.Result<T>.ErrorOrDefault() -> Neotales.Results.Error
+Neotales.Results.Result<T>.ErrorOrDefault(Neotales.Results.Error defaultValue) -> Neotales.Results.Error
+Neotales.Results.Result<T>.ErrorOrDefault(System.Func<Neotales.Results.Error>! defaultValueFactory) -> Neotales.Results.Error
+Neotales.Results.Result<T>.HasError.get -> bool
+Neotales.Results.Result<T>.HasValue.get -> bool
+Neotales.Results.Result<T>.Inspect(System.Action<T>! inspector) -> void
+Neotales.Results.Result<T>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Results.Result<T>.Map<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error, U>! factory) -> U
+Neotales.Results.Result<T>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result<T>.MapEither<U>(System.Func<T, U>! map, System.Func<System.Exception!, U>! errorMap) -> U
+Neotales.Results.Result<T>.MapError<U>(System.Func<Neotales.Results.Error, U>! map) -> U
+Neotales.Results.Result<T>.MapError<U>(System.Func<Neotales.Results.Error, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result<T>.MapError<U>(System.Func<System.Exception!, U>! map) -> U
+Neotales.Results.Result<T>.MapError<U>(System.Func<System.Exception!, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.Result<T>.MapResult<U, E>(System.Func<T, U>! mapValue, System.Func<Neotales.Results.Error, E>! mapError) -> Neotales.Results.Result<U, E>!
+Neotales.Results.Result<T>.MapResult<U>(System.Func<T, U>! mapValue) -> Neotales.Results.Result<U>!
+Neotales.Results.Result<T>.Match(System.Func<T, bool>! map) -> bool
+Neotales.Results.Result<T>.Match(System.Func<T, bool>! map, System.Func<Neotales.Results.Error, bool>! errorMap) -> bool
+Neotales.Results.Result<T>.Match(System.Func<T, bool>! map, System.Func<System.Exception!, bool>! errorMap) -> bool
+Neotales.Results.Result<T>.Or(System.Func<T>! valueFactory) -> Neotales.Results.Result<T>!
+Neotales.Results.Result<T>.Or(T value) -> Neotales.Results.Result<T>!
+Neotales.Results.Result<T>.Result(Neotales.Results.Error error) -> void
+Neotales.Results.Result<T>.Result(T value) -> void
+Neotales.Results.Result<T>.TryGetError(out Neotales.Results.Error error) -> bool
+Neotales.Results.Result<T>.TryGetValue(out Neotales.Results.Error error) -> bool
+Neotales.Results.Result<T>.TryGetValue(out T value) -> bool
+Neotales.Results.Result<T>.Value.get -> object?
+Neotales.Results.Result<T>.ValueOrDefault() -> T
+Neotales.Results.Result<T>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Results.Result<T>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.Result<T>.ValueOrThrow() -> T
+Neotales.Results.ResultException
+Neotales.Results.ResultException.ResultException() -> void
+Neotales.Results.ResultException.ResultException(string! message) -> void
+Neotales.Results.ResultException.ResultException(string! message, System.Exception! innerException) -> void
+Neotales.Results.ResultException.ResultException(string! message, System.Exception! innerException, object? value) -> void
+Neotales.Results.ResultException.ResultException(string! message, object? value) -> void
+Neotales.Results.ResultException.Value.get -> object?
+Neotales.Results.ResultsList<TValue>
+Neotales.Results.ResultsList<TValue>.IsError.get -> bool
+Neotales.Results.ResultsList<TValue>.IsOk.get -> bool
+Neotales.Results.ResultsList<TValue>.Results.get -> System.Collections.Generic.IList<Neotales.Results.Result<TValue>!>!
+Neotales.Results.ResultsList<TValue>.ResultsList() -> void
+Neotales.Results.ResultsList<TValue>.ResultsList(System.Collections.Generic.IEnumerable<Neotales.Results.Result<TValue>!>! results) -> void
+Neotales.Results.ResultsList<TValue>.ResultsList(System.Collections.Generic.IList<Neotales.Results.Result<TValue>!>! results) -> void
+Neotales.Results.ResultsList<TValue>.ResultsList(int capacity) -> void
+Neotales.Results.ResultsList<TValue>.ToAggregateException() -> System.AggregateException!
+Neotales.Results.ResultsList<TValue>.ToValues(bool throwOnError = true) -> System.Collections.Generic.List<TValue>!
+Neotales.Results.ValueResult<T, E>
+Neotales.Results.ValueResult<T, E>.ErrorOrDefault() -> Neotales.Results.Error<E>
+Neotales.Results.ValueResult<T, E>.ErrorOrDefault(Neotales.Results.Error<E> defaultValue) -> Neotales.Results.Error<E>
+Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.Error<E>>! defaultValueFactory) -> Neotales.Results.Error<E>
+Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.IError!>! defaultValueFactory) -> Neotales.Results.IError!
+Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.IError<E>!>! defaultValueFactory) -> Neotales.Results.IError<E>!
+Neotales.Results.ValueResult<T, E>.HasError.get -> bool
+Neotales.Results.ValueResult<T, E>.HasValue.get -> bool
+Neotales.Results.ValueResult<T, E>.Inspect(System.Action<T>! inspector) -> void
+Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error<E>, U>! factory) -> U
+Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.ValueResult<T, E>.MapEither<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error<E>, U>! errorMap) -> U
+Neotales.Results.ValueResult<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map) -> U
+Neotales.Results.ValueResult<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map, System.Func<U>! factory) -> U
+Neotales.Results.ValueResult<T, E>.Match(System.Func<T, bool>! map) -> bool
+Neotales.Results.ValueResult<T, E>.Match(System.Func<T, bool>! map, System.Func<E, bool>! errorMap) -> bool
+Neotales.Results.ValueResult<T, E>.Match(System.Func<T, bool>! map, System.Func<Neotales.Results.Error<E>, bool>! errorMap) -> bool
+Neotales.Results.ValueResult<T, E>.Or(Neotales.Results.Error<E> error) -> Neotales.Results.ValueResult<T, E>
+Neotales.Results.ValueResult<T, E>.Or(System.Func<Neotales.Results.Error<E>>! errorFactory) -> Neotales.Results.ValueResult<T, E>
+Neotales.Results.ValueResult<T, E>.Or(System.Func<T>! valueFactory) -> Neotales.Results.ValueResult<T, E>
+Neotales.Results.ValueResult<T, E>.Or(T value) -> Neotales.Results.ValueResult<T, E>
+Neotales.Results.ValueResult<T, E>.TryGetError(out E error) -> bool
+Neotales.Results.ValueResult<T, E>.TryGetError(out Neotales.Results.Error<E> error) -> bool
+Neotales.Results.ValueResult<T, E>.TryGetError(out Neotales.Results.IError! error) -> bool
+Neotales.Results.ValueResult<T, E>.TryGetError(out Neotales.Results.IError<E>! error) -> bool
+Neotales.Results.ValueResult<T, E>.TryGetValue(out T value) -> bool
+Neotales.Results.ValueResult<T, E>.Value.get -> object?
+Neotales.Results.ValueResult<T, E>.ValueOrDefault() -> T
+Neotales.Results.ValueResult<T, E>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Results.ValueResult<T, E>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.ValueResult<T, E>.ValueResult() -> void
+Neotales.Results.ValueResult<T, E>.ValueResult(Neotales.Results.Error<E> error) -> void
+Neotales.Results.ValueResult<T, E>.ValueResult(T value) -> void
+Neotales.Text.Extras.CliStringBuilderExtensions
+Neotales.Text.Extras.EncodingMembers
+Neotales.Text.Extras.EncodingMembers.extension(System.Text.Encoding!)
+Neotales.Text.Extras.StringBuilderExtensions
+Neotales.Text.StringBuilderCache
+override Neotales.Collections.Generic.EmptyInputs.IsEmpty.get -> bool
+override Neotales.Collections.Generic.EmptyInputs.IsReadOnly.get -> bool
+override Neotales.Collections.Generic.EmptyInputs.ToString() -> string!
+override Neotales.Collections.Generic.EmptyOutputs.IsEmpty.get -> bool
+override Neotales.Collections.Generic.EmptyOutputs.IsReadOnly.get -> bool
+override Neotales.Exec.CommandArgs.ToString() -> string!
+override Neotales.Exec.CommandToken.ToString() -> string!
+override Neotales.IO.SimpleTeeTextWriter.Dispose(bool disposing) -> void
+override Neotales.IO.SimpleTeeTextWriter.DisposeAsync() -> System.Threading.Tasks.ValueTask
+override Neotales.IO.SimpleTeeTextWriter.Encoding.get -> System.Text.Encoding!
+override Neotales.IO.SimpleTeeTextWriter.Write(char value) -> void
+override Neotales.IO.SimpleTeeTextWriter.WriteLine(string? value) -> void
+override Neotales.IO.TeeTextWriter.Dispose(bool disposing) -> void
+override Neotales.IO.TeeTextWriter.DisposeAsync() -> System.Threading.Tasks.ValueTask
+override Neotales.IO.TeeTextWriter.Encoding.get -> System.Text.Encoding!
+override Neotales.IO.TeeTextWriter.Write(char value) -> void
+override Neotales.IO.TeeTextWriter.WriteLine(string? value) -> void
+override Neotales.Options.Some<T>.ToString() -> string!
+override Neotales.Options.ValueOption<T>.Equals(object? obj) -> bool
+override Neotales.Options.ValueOption<T>.GetHashCode() -> int
+override Neotales.Results.Error.ToString() -> string!
+override Neotales.Results.Error<T>.ToString() -> string!
+static Neotales.Collections.Generic.Inputs.Empty.get -> Neotales.Collections.Generic.Inputs!
+static Neotales.Collections.Generic.Outputs.Empty.get -> Neotales.Collections.Generic.Outputs!
+static Neotales.Env.AppendPath(string! path, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> void
+static Neotales.Env.Expand(System.ReadOnlySpan<char> template, Neotales.EnvExpandOptions? options = null) -> System.ReadOnlySpan<char>
+static Neotales.Env.Expand(string! template, Neotales.EnvExpandOptions? options = null) -> string!
+static Neotales.Env.Get(string! variable, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> string?
+static Neotales.Env.GetOrDefault(string! variable, string! defaultValue, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> string!
+static Neotales.Env.Has(string! variable, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> bool
+static Neotales.Env.HasPath(string! path) -> bool
+static Neotales.Env.HasPath(string! path, System.EnvironmentVariableTarget target) -> bool
+static Neotales.Env.HasPath(string! path, string![]! paths) -> bool
+static Neotales.Env.JoinPath(params string![]! paths) -> string!
+static Neotales.Env.Keys.Home.get -> string!
+static Neotales.Env.Keys.HomeCache.get -> string!
+static Neotales.Env.Keys.HomeConfig.get -> string!
+static Neotales.Env.Keys.HomeData.get -> string!
+static Neotales.Env.Keys.Path.get -> string!
+static Neotales.Env.Keys.Shell.get -> string!
+static Neotales.Env.Keys.Temp.get -> string!
+static Neotales.Env.Keys.User.get -> string!
+static Neotales.Env.PrependPath(string! path, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> void
+static Neotales.Env.RemovePath(string! path, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> void
+static Neotales.Env.Set(string! variable, string! value, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> void
+static Neotales.Env.SplitPath(System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> string![]!
+static Neotales.Env.SplitPath(string! path) -> string![]!
+static Neotales.Env.TryExpand(System.ReadOnlySpan<char> template, Neotales.EnvExpandOptions? options = null) -> Neotales.Results.Result<System.ReadOnlyMemory<char>>!
+static Neotales.Env.TryGet(string! variable, out string! value, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> bool
+static Neotales.Env.Unset(string! variable) -> void
+static Neotales.Env.Unset(string! variable, System.EnvironmentVariableTarget target) -> void
+static Neotales.Exec.CommandArgs.From(System.Collections.Generic.IEnumerable<string!>! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.From(System.Collections.Specialized.StringCollection! collection) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.From(System.Text.StringBuilder! builder) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.From(params string![]! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.From(string! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.SplitArguments(System.ReadOnlySpan<char> args) -> System.Collections.Generic.IReadOnlyList<string!>!
+static Neotales.Exec.CommandArgs.implicit operator Neotales.Exec.CommandArgs!(System.Collections.ObjectModel.Collection<string!>! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.implicit operator Neotales.Exec.CommandArgs!(System.Collections.Specialized.StringCollection! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.implicit operator Neotales.Exec.CommandArgs!(System.Text.StringBuilder! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.implicit operator Neotales.Exec.CommandArgs!(string! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.implicit operator Neotales.Exec.CommandArgs!(string![]! args) -> Neotales.Exec.CommandArgs!
+static Neotales.Exec.CommandArgs.implicit operator System.Collections.ObjectModel.Collection<string!>!(Neotales.Exec.CommandArgs! args) -> System.Collections.ObjectModel.Collection<string!>!
+static Neotales.Exec.CommandArgs.implicit operator string!(Neotales.Exec.CommandArgs! args) -> string!
+static Neotales.Exec.CommandLexer.Tokenize(System.ReadOnlySpan<char> commandLine) -> System.Collections.Generic.IReadOnlyList<Neotales.Exec.CommandToken>!
+static Neotales.Extras.ArrayExtensions.Clear<T>(this T[]! array, int startIndex = 0, int length = -1) -> void
+static Neotales.Extras.SpanExtensions.AsString(this System.ReadOnlySpan<char> span) -> string!
+static Neotales.Extras.SpanExtensions.ContainsFold(this System.ReadOnlySpan<char> span, System.ReadOnlySpan<char> value) -> bool
+static Neotales.Extras.SpanExtensions.EndsWithFold(this System.ReadOnlySpan<char> span, System.ReadOnlySpan<char> value) -> bool
+static Neotales.Extras.SpanExtensions.EqualFold(this System.ReadOnlySpan<char> span, System.ReadOnlySpan<char> other) -> bool
+static Neotales.Extras.SpanExtensions.Hyphenate(this System.ReadOnlySpan<char> value) -> System.ReadOnlySpan<char>
+static Neotales.Extras.SpanExtensions.ScreamingSnakeCase(this System.ReadOnlySpan<char> value) -> System.ReadOnlySpan<char>
+static Neotales.Extras.SpanExtensions.StartsWithFold(this System.ReadOnlySpan<char> span, System.ReadOnlySpan<char> value) -> bool
+static Neotales.Extras.SpanExtensions.Underscore(this System.ReadOnlySpan<char> value) -> System.ReadOnlySpan<char>
+static Neotales.Extras.StringExtensions.ContainsFold(this string? source, string! value) -> bool
+static Neotales.Extras.StringExtensions.EndsWithFold(this string? source, string! value) -> bool
+static Neotales.Extras.StringExtensions.EqualsFold(this System.ReadOnlySpan<char> source, System.ReadOnlySpan<char> value) -> bool
+static Neotales.Extras.StringExtensions.Hyphenate(this string! value) -> string!
+static Neotales.Extras.StringExtensions.IsNullOrEmpty(this string? source) -> bool
+static Neotales.Extras.StringExtensions.IsNullOrWhiteSpace(this string? source) -> bool
+static Neotales.Extras.StringExtensions.ScreamingSnakeCase(this string! value) -> string!
+static Neotales.Extras.StringExtensions.StartsWithFold(this string? source, string! value) -> bool
+static Neotales.Extras.StringExtensions.Underscore(this string! value) -> string!
+static Neotales.Extras.TaskExtensions.Cap(this System.Threading.Tasks.Task! t) -> System.Runtime.CompilerServices.ConfiguredTaskAwaitable
+static Neotales.Extras.TaskExtensions.Cap(this System.Threading.Tasks.ValueTask t) -> System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable
+static Neotales.Extras.TaskExtensions.Cap<T>(this System.Threading.Tasks.Task<T>! t) -> System.Runtime.CompilerServices.ConfiguredTaskAwaitable<T>
+static Neotales.Extras.TaskExtensions.Cap<T>(this System.Threading.Tasks.ValueTask<T> t) -> System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<T>
+static Neotales.Extras.TaskExtensions.NoCap(this System.Threading.Tasks.Task! t) -> System.Runtime.CompilerServices.ConfiguredTaskAwaitable
+static Neotales.Extras.TaskExtensions.NoCap(this System.Threading.Tasks.ValueTask t) -> System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable
+static Neotales.Extras.TaskExtensions.NoCap<T>(this System.Threading.Tasks.Task<T>! t) -> System.Runtime.CompilerServices.ConfiguredTaskAwaitable<T>
+static Neotales.Extras.TaskExtensions.NoCap<T>(this System.Threading.Tasks.ValueTask<T> t) -> System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<T>
+static Neotales.Extras.UnixFileModeMembers.FromOctal(int octal) -> System.IO.UnixFileMode
+static Neotales.Extras.UnixFileModeMembers.extension(System.IO.UnixFileMode).FromOctal(int octal) -> System.IO.UnixFileMode
+static Neotales.IO.DisposableDirectory.implicit operator Neotales.IO.DisposableDirectory!(string! directoryPath) -> Neotales.IO.DisposableDirectory!
+static Neotales.IO.DisposableDirectory.implicit operator string!(Neotales.IO.DisposableDirectory! disposableDirectory) -> string!
+static Neotales.IO.DisposableFile.implicit operator Neotales.IO.DisposableFile!(string! filePath) -> Neotales.IO.DisposableFile!
+static Neotales.IO.DisposableFile.implicit operator string!(Neotales.IO.DisposableFile! disposableFile) -> string!
+static Neotales.IO.Extras.DirectoryMembers.Copy(string! sourceDirName, string! destDirName, bool recursive = false) -> void
+static Neotales.IO.Extras.DirectoryMembers.Ensure(string! path) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.Make(string! path) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.MakeTemp(string? prefix = null) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.Read(string! path) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.Read(string! path, string! searchPattern) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.Read(string! path, string! searchPattern, System.IO.SearchOption searchOption) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.RealPath(string! linkPath, bool returnFinalTarget = true) -> System.IO.FileSystemInfo?
+static Neotales.IO.Extras.DirectoryMembers.SymlinkDirectory(string! path, string! target) -> System.IO.FileSystemInfo!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Copy(string! sourceDirName, string! destDirName, bool recursive = false) -> void
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Ensure(string! path) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Make(string! path) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).MakeTemp(string? prefix = null) -> System.IO.DirectoryInfo!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Read(string! path) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Read(string! path, string! searchPattern) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).Read(string! path, string! searchPattern, System.IO.SearchOption searchOption) -> System.Collections.Generic.IEnumerable<System.IO.FileSystemInfo!>!
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).RealPath(string! linkPath, bool returnFinalTarget = true) -> System.IO.FileSystemInfo?
+static Neotales.IO.Extras.DirectoryMembers.extension(System.IO.Directory!).SymlinkDirectory(string! path, string! target) -> System.IO.FileSystemInfo!
+static Neotales.IO.Extras.FileMembers.Append(string! path, System.ReadOnlySpan<byte> bytes) -> void
+static Neotales.IO.Extras.FileMembers.Append(string! path, byte[]! bytes) -> void
+static Neotales.IO.Extras.FileMembers.AppendAsync(string! path, System.ReadOnlyMemory<byte> bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.AppendAsync(string! path, byte[]! bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.Chmod(string! path, System.IO.UnixFileMode mode, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.Chmod(string! path, int octal, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.Chown(string! path, int userId, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.Chown(string! path, int userId, int groupId, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.Chown(string! path, string! userName, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.Chown(string! path, string! userName, string! groupName, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.LStat(string! path) -> Neotales.IO.UnixFileStatus
+static Neotales.IO.Extras.FileMembers.RealPath(string! linkPath, bool returnFinalTarget = true) -> System.IO.FileSystemInfo?
+static Neotales.IO.Extras.FileMembers.Stat(string! path) -> Neotales.IO.UnixFileStatus
+static Neotales.IO.Extras.FileMembers.Symlink(string! path, string! target) -> System.IO.FileSystemInfo!
+static Neotales.IO.Extras.FileMembers.WriteFileAsync(string! path, System.ReadOnlyMemory<byte> bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.WriteTextAsync(string! path, System.ReadOnlyMemory<char> contents, System.Text.Encoding! encoding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.WriteTextAsync(string! path, System.ReadOnlyMemory<char> contents, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Append(string! path, System.ReadOnlySpan<byte> bytes) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Append(string! path, byte[]! bytes) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).AppendAsync(string! path, System.ReadOnlyMemory<byte> bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).AppendAsync(string! path, byte[]! bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chmod(string! path, System.IO.UnixFileMode mode, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chmod(string! path, int octal, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chown(string! path, int userId, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chown(string! path, int userId, int groupId, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chown(string! path, string! userName, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Chown(string! path, string! userName, string! groupName, bool recursive = false) -> void
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).LStat(string! path) -> Neotales.IO.UnixFileStatus
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).RealPath(string! linkPath, bool returnFinalTarget = true) -> System.IO.FileSystemInfo?
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Stat(string! path) -> Neotales.IO.UnixFileStatus
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).Symlink(string! path, string! target) -> System.IO.FileSystemInfo!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).WriteFileAsync(string! path, System.ReadOnlyMemory<byte> bytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).WriteTextAsync(string! path, System.ReadOnlyMemory<char> contents, System.Text.Encoding! encoding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.FileMembers.extension(System.IO.File!).WriteTextAsync(string! path, System.ReadOnlyMemory<char> contents, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Neotales.IO.Extras.UnixFileModeMembers.FromOctal(int octal) -> System.IO.UnixFileMode
+static Neotales.IO.Extras.UnixFileModeMembers.extension(System.IO.UnixFileMode).FromOctal(int octal) -> System.IO.UnixFileMode
+static Neotales.Never.Value.get -> Neotales.Never
+static Neotales.Observer<T>.Create(System.Action<T>? onNext = null, System.Action<System.Exception!>? onError = null, System.Action? onCompleted = null) -> Neotales.Observer<T>!
+static Neotales.Options.None.IsNone(object? value) -> bool
+static Neotales.Options.None.Value.get -> Neotales.Options.None
+static Neotales.Options.None.implicit operator Neotales.Never(Neotales.Options.None none) -> Neotales.Never
+static Neotales.Options.None.implicit operator Neotales.Options.None(Neotales.Never never) -> Neotales.Options.None
+static Neotales.Options.None.implicit operator Neotales.Options.None(System.DBNull! dbNull) -> Neotales.Options.None
+static Neotales.Options.None.implicit operator Neotales.Options.None(System.ValueTuple valueTuple) -> Neotales.Options.None
+static Neotales.Options.None.implicit operator System.DBNull!(Neotales.Options.None none) -> System.DBNull!
+static Neotales.Options.None.implicit operator System.ValueTuple(Neotales.Options.None none) -> System.ValueTuple
+static Neotales.Options.None<T>.Value.get -> Neotales.Options.None<T>
+static Neotales.Options.None<T>.implicit operator Neotales.Options.None<T>(Neotales.Options.None none) -> Neotales.Options.None<T>
+static Neotales.Options.Option.From<T>(T? value) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option.None<T>() -> Neotales.Options.Option<T>!
+static Neotales.Options.Option.Some<T>(T value) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.From(T? value) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.None() -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.NoneValue.get -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.Some(T value) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.implicit operator Neotales.Options.Option<T>!(Neotales.Never never) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.implicit operator Neotales.Options.Option<T>!(Neotales.Options.None none) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.implicit operator Neotales.Options.Option<T>!(System.DBNull! dbNull) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.implicit operator Neotales.Options.Option<T>!(System.ValueTuple valueTuple) -> Neotales.Options.Option<T>!
+static Neotales.Options.Option<T>.implicit operator Neotales.Options.Option<T>!(T value) -> Neotales.Options.Option<T>!
+static Neotales.Options.Some<T>.implicit operator Neotales.Options.Option<T>!(Neotales.Options.Some<T> some) -> Neotales.Options.Option<T>!
+static Neotales.Options.Some<T>.implicit operator Neotales.Options.Some<T>(T value) -> Neotales.Options.Some<T>
+static Neotales.Options.Some<T>.implicit operator T(Neotales.Options.Some<T> some) -> T
+static Neotales.Options.ValueOption.From<T>(T? value) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption.None<T>() -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption.Some<T>(T value) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.None() -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.NoneValue.get -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.Some(T value) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.implicit operator Neotales.Options.ValueOption<T>(Neotales.Never never) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.implicit operator Neotales.Options.ValueOption<T>(Neotales.Options.None none) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.implicit operator Neotales.Options.ValueOption<T>(System.DBNull! dbNull) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.implicit operator Neotales.Options.ValueOption<T>(System.ValueTuple valueTuple) -> Neotales.Options.ValueOption<T>
+static Neotales.Options.ValueOption<T>.implicit operator Neotales.Options.ValueOption<T>(T value) -> Neotales.Options.ValueOption<T>
+static Neotales.Results.Error.Empty.get -> Neotales.Results.Error
+static Neotales.Results.Error.From(Neotales.Results.IError! cause, string? message = null, string? code = null) -> Neotales.Results.Error
+static Neotales.Results.Error.From(System.Exception! exception, string? message = null, string? code = null) -> Neotales.Results.Error
+static Neotales.Results.Error.From(string! message, string? code = null) -> Neotales.Results.Error
+static Neotales.Results.Error.implicit operator Neotales.Results.Error(System.Exception! exception) -> Neotales.Results.Error
+static Neotales.Results.Error.implicit operator Neotales.Results.Error(string! message) -> Neotales.Results.Error
+static Neotales.Results.Error.implicit operator System.Exception!(Neotales.Results.Error error) -> System.Exception!
+static Neotales.Results.Error.implicit operator string!(Neotales.Results.Error error) -> string!
+static Neotales.Results.Error<T>.Empty.get -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.From(T value) -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.From(T value, Neotales.Results.IError! cause, string? message = null, string? code = null) -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.From(T value, System.Exception! exception, string? message = null, string? code = null) -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.From(T value, string! message, string? code = null) -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.implicit operator Neotales.Results.Error<T>(T value) -> Neotales.Results.Error<T>
+static Neotales.Results.Error<T>.implicit operator System.Exception!(Neotales.Results.Error<T> error) -> System.Exception!
+static Neotales.Results.Error<T>.implicit operator T(Neotales.Results.Error<T> error) -> T
+static Neotales.Results.Error<T>.implicit operator string!(Neotales.Results.Error<T> error) -> string!
+static Neotales.Results.Result.Fail(Neotales.Results.Error error) -> Neotales.Results.Result!
+static Neotales.Results.Result.Fail(Neotales.Results.IError! cause, string? message = null, string? code = null) -> Neotales.Results.Result!
+static Neotales.Results.Result.Fail(System.Exception! exception, string? message = null, string? code = null) -> Neotales.Results.Result!
+static Neotales.Results.Result.Fail(string! message, string? code = null) -> Neotales.Results.Result!
+static Neotales.Results.Result.Fail<T, E>(Neotales.Results.Error<E> error) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result.Ok() -> Neotales.Results.Result!
+static Neotales.Results.Result.Ok<T, E>(T value) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result.Ok<T>(T value) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result.OkDefault.get -> Neotales.Results.Result!
+static Neotales.Results.Result.Try(System.Action! action) -> Neotales.Results.Result!
+static Neotales.Results.Result.Try<T, E>(System.Func<T>! action, System.Func<System.Exception!, E>! errorFactory) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result.Try<T, E>(System.Func<T>! action, System.Func<System.Exception!, Neotales.Results.Error<E>>! errorFactory) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result.Try<T>(System.Func<T>! action) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result.TryAsync(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Neotales.Results.Result!>!
+static Neotales.Results.Result.TryAsync(System.Func<System.Threading.Tasks.Task!>! action) -> System.Threading.Tasks.Task<Neotales.Results.Result!>!
+static Neotales.Results.Result.TryAsync<T, E>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<T>!>! action, System.Func<System.Exception!, E>! errorFactory, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Neotales.Results.Result<T, E>!>!
+static Neotales.Results.Result.TryAsync<T>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<T>!>! action, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!
+static Neotales.Results.Result.TryAsync<T>(System.Func<System.Threading.Tasks.Task<T>!>! action) -> System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!
+static Neotales.Results.Result.implicit operator Neotales.Results.Error(Neotales.Results.Result! result) -> Neotales.Results.Error
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Never never) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Results.Error error) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Results.Result<Neotales.Never, Neotales.Results.Error>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Results.Result<Neotales.Never>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Results.Result<System.ValueTuple, Neotales.Results.Error>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(Neotales.Results.Result<System.ValueTuple>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(System.Exception! exception) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(System.Threading.Tasks.Task<Neotales.Results.Result!>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(System.Threading.Tasks.ValueTask<Neotales.Results.Result!> result) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator Neotales.Results.Result!(string! message) -> Neotales.Results.Result!
+static Neotales.Results.Result.implicit operator System.Threading.Tasks.Task<Neotales.Results.Result!>!(Neotales.Results.Result! result) -> System.Threading.Tasks.Task<Neotales.Results.Result!>!
+static Neotales.Results.Result.implicit operator System.Threading.Tasks.ValueTask<Neotales.Results.Result!>(Neotales.Results.Result! result) -> System.Threading.Tasks.ValueTask<Neotales.Results.Result!>
+static Neotales.Results.Result<T, E>.Fail(E value, Neotales.Results.IError! cause, string? message = null, string? code = null) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.Fail(E value, System.Exception! exception, string? message = null, string? code = null) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.Fail(E value, string! message, string? code = null) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.Fail(Neotales.Results.Error<E> error) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.Ok(T value) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Error<E>(Neotales.Results.Result<T, E>! result) -> Neotales.Results.Error<E>
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result!(Neotales.Results.Result<T, E>! result) -> Neotales.Results.Result!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result<T, E>!(Neotales.Results.Error<E> error) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result<T, E>!(System.Threading.Tasks.Task<Neotales.Results.Result<T, E>!>! result) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result<T, E>!(System.Threading.Tasks.ValueTask<Neotales.Results.Result<T, E>!> result) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result<T, E>!(T value) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.Result<T, E>.implicit operator Neotales.Results.Result<T>!(Neotales.Results.Result<T, E>! result) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T, E>.implicit operator System.Threading.Tasks.Task<Neotales.Results.Result<T, E>!>!(Neotales.Results.Result<T, E>! result) -> System.Threading.Tasks.Task<Neotales.Results.Result<T, E>!>!
+static Neotales.Results.Result<T, E>.implicit operator System.Threading.Tasks.ValueTask<Neotales.Results.Result<T, E>!>(Neotales.Results.Result<T, E>! result) -> System.Threading.Tasks.ValueTask<Neotales.Results.Result<T, E>!>
+static Neotales.Results.Result<T, E>.implicit operator T(Neotales.Results.Result<T, E>! result) -> T
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Error(Neotales.Results.Result<T>! result) -> Neotales.Results.Error
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(Neotales.Results.Error error) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(System.Exception! exception) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(System.Threading.Tasks.Task<Neotales.Results.Result<T>!>! result) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(System.Threading.Tasks.ValueTask<Neotales.Results.Result<T>!> result) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(T value) -> Neotales.Results.Result<T>!
+static Neotales.Results.Result<T>.implicit operator System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!(Neotales.Results.Result<T>! result) -> System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!
+static Neotales.Results.Result<T>.implicit operator System.Threading.Tasks.ValueTask<Neotales.Results.Result<T>!>(Neotales.Results.Result<T>! result) -> System.Threading.Tasks.ValueTask<Neotales.Results.Result<T>!>
+static Neotales.Results.Result<T>.implicit operator T(Neotales.Results.Result<T>! result) -> T
+static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.Error<E>(Neotales.Results.ValueResult<T, E> result) -> Neotales.Results.Error<E>
+static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.Result<T, E>!(Neotales.Results.ValueResult<T, E> result) -> Neotales.Results.Result<T, E>!
+static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.ValueResult<T, E>(Neotales.Results.Error<E> error) -> Neotales.Results.ValueResult<T, E>
+static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.ValueResult<T, E>(T value) -> Neotales.Results.ValueResult<T, E>
+static Neotales.Results.ValueResult<T, E>.implicit operator T(Neotales.Results.ValueResult<T, E> result) -> T
+static Neotales.Text.Extras.CliStringBuilderExtensions.AppendCliArgument(this System.Text.StringBuilder! sb, string! argument) -> System.Text.StringBuilder!
+static Neotales.Text.Extras.EncodingMembers.extension(System.Text.Encoding!).UTF8NoBom.get -> System.Text.Encoding!
+static Neotales.Text.Extras.EncodingMembers.get_UTF8NoBom() -> System.Text.Encoding!
+static Neotales.Text.Extras.StringBuilderExtensions.AsReadOnlySpan(this System.Text.StringBuilder! builder) -> System.ReadOnlySpan<char>
+static Neotales.Text.Extras.StringBuilderExtensions.AsSpan(this System.Text.StringBuilder! builder) -> System.Span<char>
+static Neotales.Text.Extras.StringBuilderExtensions.CopyTo(this System.Text.StringBuilder! builder, System.Span<char> span) -> void
+static Neotales.Text.Extras.StringBuilderExtensions.CopyTo(this System.Text.StringBuilder! builder, System.Span<char> span, int count) -> void
+static Neotales.Text.Extras.StringBuilderExtensions.ToArray(this System.Text.StringBuilder! builder) -> char[]!
+static Neotales.Text.StringBuilderCache.Acquire(int capacity = 16) -> System.Text.StringBuilder!
+static Neotales.Text.StringBuilderCache.GetStringAndRelease(System.Text.StringBuilder! sb) -> string!
+static Neotales.Text.StringBuilderCache.Release(System.Text.StringBuilder! sb) -> void
+virtual Neotales.Collections.Generic.Inputs.IsEmpty.get -> bool
+virtual Neotales.Collections.Generic.Inputs.IsReadOnly.get -> bool
+virtual Neotales.Collections.Generic.Outputs.IsEmpty.get -> bool
+virtual Neotales.Collections.Generic.Outputs.IsReadOnly.get -> bool
