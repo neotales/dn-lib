@@ -274,6 +274,13 @@ namespace Neotales.Results
             return factory();
         }
 
+        /// <summary>Maps the error payload when this result is in error state.</summary>
+        /// <typeparam name="U">Mapped error payload type.</typeparam>
+        /// <param name="map">Error payload mapping function.</param>
+        /// <returns>The mapped error payload, or default for success.</returns>
+        public U MapError<U>(Func<E, U> map)
+            => this.ok ? default! : map(this.error.Value);
+
         /// <summary>
         /// Maps value or error into one return type.
         /// </summary>
@@ -288,6 +295,22 @@ namespace Neotales.Results
 
             return errorMap(this.error);
         }
+
+        /// <summary>Maps the success value while retaining the error type.</summary>
+        /// <typeparam name="U">Mapped success value type.</typeparam>
+        /// <param name="mapValue">Success value mapping function.</param>
+        /// <returns>A mapped value result.</returns>
+        public ValueResult<U, E> MapResult<U>(Func<T, U> mapValue)
+            => this.ok ? new(mapValue(this.value)) : new(this.error);
+
+        /// <summary>Maps both the success value and error.</summary>
+        /// <typeparam name="U">Mapped success value type.</typeparam>
+        /// <typeparam name="V">Mapped error payload type.</typeparam>
+        /// <param name="mapValue">Success value mapping function.</param>
+        /// <param name="mapError">Error mapping function.</param>
+        /// <returns>A mapped value result.</returns>
+        public ValueResult<U, V> MapResult<U, V>(Func<T, U> mapValue, Func<Error<E>, Error<V>> mapError)
+            => this.ok ? new(mapValue(this.value)) : new(mapError(this.error));
 
         /// <summary>
         /// Matches on value when available.

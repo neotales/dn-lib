@@ -28,6 +28,12 @@ namespace Neotales.Results.Tests
             Assert.Equal(8, valueSuccess.Expect("unused"));
             Assert.Equal(error, referenceFailure.ExpectError());
             Assert.Equal(error, valueFailure.ExpectError());
+            var referenceThrown = Assert.Throws<ResultException>(() => referenceFailure.Expect("reference failure"));
+            var valueThrown = Assert.Throws<ResultException>(() => valueFailure.Expect("value failure"));
+            Assert.Equal(error, referenceThrown.Value);
+            Assert.Equal(error, valueThrown.Value);
+            Assert.Equal(16, valueSuccess.MapResult(x => x * 2).ValueOrDefault());
+            Assert.Equal("bad", valueFailure.MapError(e => e.Value));
             Assert.Equal(8, Assert.Throws<ResultException>(() => referenceSuccess.ExpectError()).Value);
             Assert.Equal(8, Assert.Throws<ResultException>(() => valueSuccess.ExpectError()).Value);
         }
