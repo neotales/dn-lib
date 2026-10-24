@@ -6,6 +6,13 @@ its source.
 
 ## Development
 
+Standard libraries live under `std/<Library>`. `cmn/src` is shared source,
+compiled into consuming packages through explicit links rather than shipped as
+a runtime dependency. A path-filtered build/release for a standard library must
+include its project tree and every shared-source/configuration dependency (for
+Core, `std/Core/**`, `cmn/src/**`, and the root build/solution files). CI and
+release automation are not configured yet.
+
 The repository uses the .NET SDK pinned in `global.json`. Restore and build the
 solution with:
 

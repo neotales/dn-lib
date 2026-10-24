@@ -13,7 +13,7 @@ root; the package metadata declares `MIT` as its license expression.
 | `cmn/src/ffi/unix/errors.cs` | [dotnet/runtime](https://github.com/dotnet/runtime) | MIT |
 | `cmn/src/ffi/unix/system.native/stat.cs` | [dotnet/runtime](https://github.com/dotnet/runtime) | MIT |
 | `cmn/src/ffi/unix/system.native/getpwuid.cs` | [dotnet/runtime](https://github.com/dotnet/runtime) | MIT |
-| `Core/src/Text/StringBuilderCache.cs` | [`StringBuilderCache.cs`](https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/System/Text/StringBuilderCache.cs) | MIT |
+| `std/Core/src/Text/StringBuilderCache.cs` | [`StringBuilderCache.cs`](https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/System/Text/StringBuilderCache.cs) | MIT |
 
 ### .NET runtime MIT license
 
@@ -48,7 +48,7 @@ The .NET runtime is a trademark of the .NET Foundation and its contributors. The
 
 ## ObviousAwait
 
-`Core/src/Extras/TasksExtensions.cs` is derived from
+`std/Core/src/Extras/TasksExtensions.cs` is derived from
 [`ObviousExtensions.cs`](https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs)
 in [ObviousAwait](https://github.com/awaescher/ObviousAwait), with extension
 names adapted in this package.
