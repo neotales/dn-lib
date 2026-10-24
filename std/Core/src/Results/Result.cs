@@ -499,6 +499,12 @@ namespace Neotales.Results
             return defaultValue;
         }
 
+        /// <summary>Returns the error or throws when this result is successful.</summary>
+        /// <param name="message">Message for the exception when this result has a value.</param>
+        /// <returns>The error.</returns>
+        public Error ExpectError(string message = "Result has a value.")
+            => this.ok ? throw new ResultException(message, this.never) : this.error;
+
         /// <summary>
         /// Tries to extract the current error payload.
         /// </summary>

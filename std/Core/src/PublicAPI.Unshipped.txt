@@ -365,6 +365,7 @@ Neotales.Results.Result
 Neotales.Results.Result.ErrorOrDefault() -> Neotales.Results.IError!
 Neotales.Results.Result.ErrorOrDefault(Neotales.Results.Error defaultValue) -> Neotales.Results.Error
 Neotales.Results.Result.ErrorOrDefault(System.Func<Neotales.Results.IError!>! defaultValueFactory) -> Neotales.Results.IError!
+Neotales.Results.Result.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error
 Neotales.Results.Result.HasError.get -> bool
 Neotales.Results.Result.HasValue.get -> bool
 Neotales.Results.Result.Map<U>(System.Func<U>! map) -> U
@@ -380,6 +381,8 @@ Neotales.Results.Result<T, E>
 Neotales.Results.Result<T, E>.ErrorOrDefault() -> Neotales.Results.Error<E>
 Neotales.Results.Result<T, E>.ErrorOrDefault(System.Func<E>! defaultValueFactory) -> Neotales.Results.Error<E>
 Neotales.Results.Result<T, E>.ErrorOrDefault(System.Func<Neotales.Results.Error<E>>! defaultValueFactory) -> Neotales.Results.Error<E>
+Neotales.Results.Result<T, E>.Expect(string! message) -> T
+Neotales.Results.Result<T, E>.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error<E>
 Neotales.Results.Result<T, E>.HasError.get -> bool
 Neotales.Results.Result<T, E>.HasValue.get -> bool
 Neotales.Results.Result<T, E>.Inspect(System.Action<T>! inspector) -> void
@@ -410,6 +413,8 @@ Neotales.Results.Result<T>
 Neotales.Results.Result<T>.ErrorOrDefault() -> Neotales.Results.Error
 Neotales.Results.Result<T>.ErrorOrDefault(Neotales.Results.Error defaultValue) -> Neotales.Results.Error
 Neotales.Results.Result<T>.ErrorOrDefault(System.Func<Neotales.Results.Error>! defaultValueFactory) -> Neotales.Results.Error
+Neotales.Results.Result<T>.Expect(string! message) -> T
+Neotales.Results.Result<T>.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error
 Neotales.Results.Result<T>.HasError.get -> bool
 Neotales.Results.Result<T>.HasValue.get -> bool
 Neotales.Results.Result<T>.Inspect(System.Action<T>! inspector) -> void
@@ -444,6 +449,8 @@ Neotales.Results.ResultException.ResultException(string! message) -> void
 Neotales.Results.ResultException.ResultException(string! message, System.Exception! innerException) -> void
 Neotales.Results.ResultException.ResultException(string! message, System.Exception! innerException, object? value) -> void
 Neotales.Results.ResultException.ResultException(string! message, object? value) -> void
+Neotales.Results.ResultException.ResultException(System.Exception! exception) -> void
+Neotales.Results.ResultException.TrackCallerInfo(int lineNumber = 0, string! filePath = "", string! target = "") -> Neotales.Results.ResultException!
 Neotales.Results.ResultException.Value.get -> object?
 Neotales.Results.ResultsList<TValue>
 Neotales.Results.ResultsList<TValue>.IsError.get -> bool
@@ -455,12 +462,25 @@ Neotales.Results.ResultsList<TValue>.ResultsList(System.Collections.Generic.ILis
 Neotales.Results.ResultsList<TValue>.ResultsList(int capacity) -> void
 Neotales.Results.ResultsList<TValue>.ToAggregateException() -> System.AggregateException!
 Neotales.Results.ResultsList<TValue>.ToValues(bool throwOnError = true) -> System.Collections.Generic.List<TValue>!
+Neotales.Results.ValueResult
+Neotales.Results.ValueResult.ErrorOrDefault() -> Neotales.Results.Error
+Neotales.Results.ValueResult.ErrorOrDefault(System.Func<Neotales.Results.Error>! defaultValueFactory) -> Neotales.Results.Error
+Neotales.Results.ValueResult.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error
+Neotales.Results.ValueResult.HasError.get -> bool
+Neotales.Results.ValueResult.HasValue.get -> bool
+Neotales.Results.ValueResult.Match(System.Func<bool>! onValue, System.Func<Neotales.Results.Error, bool>! onError) -> bool
+Neotales.Results.ValueResult.TryGetError(out Neotales.Results.Error value) -> bool
+Neotales.Results.ValueResult.Value.get -> object!
+Neotales.Results.ValueResult.ValueResult() -> void
+Neotales.Results.ValueResult.ValueResult(Neotales.Results.Error error) -> void
 Neotales.Results.ValueResult<T, E>
 Neotales.Results.ValueResult<T, E>.ErrorOrDefault() -> Neotales.Results.Error<E>
 Neotales.Results.ValueResult<T, E>.ErrorOrDefault(Neotales.Results.Error<E> defaultValue) -> Neotales.Results.Error<E>
 Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.Error<E>>! defaultValueFactory) -> Neotales.Results.Error<E>
 Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.IError!>! defaultValueFactory) -> Neotales.Results.IError!
 Neotales.Results.ValueResult<T, E>.ErrorOrDefault(System.Func<Neotales.Results.IError<E>!>! defaultValueFactory) -> Neotales.Results.IError<E>!
+Neotales.Results.ValueResult<T, E>.Expect(string! message) -> T
+Neotales.Results.ValueResult<T, E>.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error<E>
 Neotales.Results.ValueResult<T, E>.HasError.get -> bool
 Neotales.Results.ValueResult<T, E>.HasValue.get -> bool
 Neotales.Results.ValueResult<T, E>.Inspect(System.Action<T>! inspector) -> void
@@ -486,9 +506,32 @@ Neotales.Results.ValueResult<T, E>.Value.get -> object?
 Neotales.Results.ValueResult<T, E>.ValueOrDefault() -> T
 Neotales.Results.ValueResult<T, E>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
 Neotales.Results.ValueResult<T, E>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.ValueResult<T, E>.ValueOrThrow() -> T
 Neotales.Results.ValueResult<T, E>.ValueResult() -> void
 Neotales.Results.ValueResult<T, E>.ValueResult(Neotales.Results.Error<E> error) -> void
 Neotales.Results.ValueResult<T, E>.ValueResult(T value) -> void
+Neotales.Results.ValueResult<T>
+Neotales.Results.ValueResult<T>.ErrorOrDefault() -> Neotales.Results.Error
+Neotales.Results.ValueResult<T>.Expect(string! message) -> T
+Neotales.Results.ValueResult<T>.ExpectError(string! message = "Result has a value.") -> Neotales.Results.Error
+Neotales.Results.ValueResult<T>.HasError.get -> bool
+Neotales.Results.ValueResult<T>.HasValue.get -> bool
+Neotales.Results.ValueResult<T>.Inspect(System.Action<T>! inspector) -> void
+Neotales.Results.ValueResult<T>.Map<U>(System.Func<T, U>! map) -> U
+Neotales.Results.ValueResult<T>.MapEither<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error, U>! mapError) -> U
+Neotales.Results.ValueResult<T>.Match(System.Func<T, bool>! onValue) -> bool
+Neotales.Results.ValueResult<T>.Match(System.Func<T, bool>! onValue, System.Func<Neotales.Results.Error, bool>! onError) -> bool
+Neotales.Results.ValueResult<T>.Or(T value) -> Neotales.Results.ValueResult<T>
+Neotales.Results.ValueResult<T>.TryGetError(out Neotales.Results.Error value) -> bool
+Neotales.Results.ValueResult<T>.TryGetValue(out T value) -> bool
+Neotales.Results.ValueResult<T>.Value.get -> object?
+Neotales.Results.ValueResult<T>.ValueOrDefault() -> T
+Neotales.Results.ValueResult<T>.ValueOrDefault(System.Func<T>! defaultValueFactory) -> T
+Neotales.Results.ValueResult<T>.ValueOrDefault(T defaultValue) -> T
+Neotales.Results.ValueResult<T>.ValueOrThrow() -> T
+Neotales.Results.ValueResult<T>.ValueResult() -> void
+Neotales.Results.ValueResult<T>.ValueResult(Neotales.Results.Error error) -> void
+Neotales.Results.ValueResult<T>.ValueResult(T value) -> void
 Neotales.Text.Extras.CliStringBuilderExtensions
 Neotales.Text.Extras.EncodingMembers
 Neotales.Text.Extras.EncodingMembers.extension(System.Text.Encoding!)
@@ -755,11 +798,30 @@ static Neotales.Results.Result<T>.implicit operator Neotales.Results.Result<T>!(
 static Neotales.Results.Result<T>.implicit operator System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!(Neotales.Results.Result<T>! result) -> System.Threading.Tasks.Task<Neotales.Results.Result<T>!>!
 static Neotales.Results.Result<T>.implicit operator System.Threading.Tasks.ValueTask<Neotales.Results.Result<T>!>(Neotales.Results.Result<T>! result) -> System.Threading.Tasks.ValueTask<Neotales.Results.Result<T>!>
 static Neotales.Results.Result<T>.implicit operator T(Neotales.Results.Result<T>! result) -> T
+static Neotales.Results.ResultException.FromError(System.Exception! exception) -> Neotales.Results.ResultException!
+static Neotales.Results.ResultException.FromException(System.Exception! exception) -> Neotales.Results.ResultException!
+static Neotales.Results.ResultException.FromUnknown(object? error, string? message = null) -> Neotales.Results.ResultException!
+static Neotales.Results.ValueResult.Fail(Neotales.Results.Error error) -> Neotales.Results.ValueResult
+static Neotales.Results.ValueResult.Fail<T>(Neotales.Results.Error error) -> Neotales.Results.ValueResult<T>
+static Neotales.Results.ValueResult.implicit operator Neotales.Results.Result!(Neotales.Results.ValueResult result) -> Neotales.Results.Result!
+static Neotales.Results.ValueResult.implicit operator Neotales.Results.ValueResult(Neotales.Results.Error error) -> Neotales.Results.ValueResult
+static Neotales.Results.ValueResult.implicit operator Neotales.Results.ValueResult(Neotales.Results.Result! result) -> Neotales.Results.ValueResult
+static Neotales.Results.ValueResult.Ok() -> Neotales.Results.ValueResult
+static Neotales.Results.ValueResult.Ok<T>(T value) -> Neotales.Results.ValueResult<T>
 static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.Error<E>(Neotales.Results.ValueResult<T, E> result) -> Neotales.Results.Error<E>
 static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.Result<T, E>!(Neotales.Results.ValueResult<T, E> result) -> Neotales.Results.Result<T, E>!
 static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.ValueResult<T, E>(Neotales.Results.Error<E> error) -> Neotales.Results.ValueResult<T, E>
 static Neotales.Results.ValueResult<T, E>.implicit operator Neotales.Results.ValueResult<T, E>(T value) -> Neotales.Results.ValueResult<T, E>
 static Neotales.Results.ValueResult<T, E>.implicit operator T(Neotales.Results.ValueResult<T, E> result) -> T
+static Neotales.Results.ValueResult<T>.Fail(Neotales.Results.Error error) -> Neotales.Results.ValueResult<T>
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.Error(Neotales.Results.ValueResult<T> result) -> Neotales.Results.Error
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.Result<T>!(Neotales.Results.ValueResult<T> result) -> Neotales.Results.Result<T>!
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.ValueResult<T, System.Exception!>(Neotales.Results.ValueResult<T> result) -> Neotales.Results.ValueResult<T, System.Exception!>
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.ValueResult<T>(Neotales.Results.Error error) -> Neotales.Results.ValueResult<T>
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.ValueResult<T>(Neotales.Results.Result<T>! result) -> Neotales.Results.ValueResult<T>
+static Neotales.Results.ValueResult<T>.implicit operator Neotales.Results.ValueResult<T>(T value) -> Neotales.Results.ValueResult<T>
+static Neotales.Results.ValueResult<T>.implicit operator T(Neotales.Results.ValueResult<T> result) -> T
+static Neotales.Results.ValueResult<T>.Ok(T value) -> Neotales.Results.ValueResult<T>
 static Neotales.Text.Extras.CliStringBuilderExtensions.AppendCliArgument(this System.Text.StringBuilder! sb, string! argument) -> System.Text.StringBuilder!
 static Neotales.Text.Extras.EncodingMembers.extension(System.Text.Encoding!).UTF8NoBom.get -> System.Text.Encoding!
 static Neotales.Text.Extras.EncodingMembers.get_UTF8NoBom() -> System.Text.Encoding!
@@ -775,3 +837,9 @@ virtual Neotales.Collections.Generic.Inputs.IsEmpty.get -> bool
 virtual Neotales.Collections.Generic.Inputs.IsReadOnly.get -> bool
 virtual Neotales.Collections.Generic.Outputs.IsEmpty.get -> bool
 virtual Neotales.Collections.Generic.Outputs.IsReadOnly.get -> bool
+virtual Neotales.Results.ResultException.FilePath.get -> string!
+virtual Neotales.Results.ResultException.FilePath.set -> void
+virtual Neotales.Results.ResultException.LineNumber.get -> int
+virtual Neotales.Results.ResultException.LineNumber.set -> void
+virtual Neotales.Results.ResultException.Target.get -> string!
+virtual Neotales.Results.ResultException.Target.set -> void

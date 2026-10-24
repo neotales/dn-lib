@@ -63,6 +63,23 @@ namespace Neotales.Results
         /// <value><see langword="true"/> when error is present.</value>
         public bool HasError => !this.ok;
 
+        /// <summary>Returns the value or throws with a custom message when in error state.</summary>
+        /// <param name="message">Message for the thrown exception.</param>
+        /// <returns>The success value.</returns>
+        public T Expect(string message)
+            => this.ok ? this.value : throw new ResultException(message, (object)this.error);
+
+        /// <summary>Returns the success value or throws the associated error.</summary>
+        /// <returns>The success value.</returns>
+        public T ValueOrThrow()
+            => this.ok ? this.value : throw this.error.ToException();
+
+        /// <summary>Returns the typed error or throws when the result has a value.</summary>
+        /// <param name="message">Message for the thrown exception.</param>
+        /// <returns>The typed error.</returns>
+        public Error<E> ExpectError(string message = "Result has a value.")
+            => this.ok ? throw new ResultException(message, (object?)this.value) : this.error;
+
         /// <summary>
         /// Gets value or error depending on state.
         /// </summary>

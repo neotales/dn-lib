@@ -196,7 +196,7 @@ namespace Neotales.Results
         /// </code>
         /// </example>
         public Exception ToException()
-            => this.Exception ?? new ResultException(this.Message, this);
+            => this.Exception ?? new ResultException(this.Message, (object)this);
 
         /// <summary>
         /// Returns the display representation of this error.
@@ -396,7 +396,7 @@ namespace Neotales.Results
         /// </summary>
         /// <returns>The associated <see cref="Exception"/> if present; otherwise a new <see cref="ResultException"/>.</returns>
         public Exception ToException()
-            => this.Exception ?? new ResultException(this.Message, this);
+            => this.Exception ?? new ResultException(this.Message, (object)this);
 
         /// <summary>
         /// Returns the display representation of this typed error.

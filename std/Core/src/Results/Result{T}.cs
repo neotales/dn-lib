@@ -504,6 +504,18 @@ namespace Neotales.Results
             throw this.error.ToException();
         }
 
+        /// <summary>Returns the success value or throws a <see cref="ResultException"/> with the supplied message.</summary>
+        /// <param name="message">Message for the exception when this result is in error.</param>
+        /// <returns>The success value.</returns>
+        public T Expect(string message)
+            => this.ok ? this.value : throw new ResultException(message, (object)this.error);
+
+        /// <summary>Returns the error or throws when this result is successful.</summary>
+        /// <param name="message">Message for the exception when this result has a value.</param>
+        /// <returns>The error.</returns>
+        public Error ExpectError(string message = "Result has a value.")
+            => this.ok ? throw new ResultException(message, (object?)this.value) : this.error;
+
         /// <summary>
         /// Explicit interface implementation for the no argument <c>IResult.ErrorOrDefault</c>.
         /// </summary>
