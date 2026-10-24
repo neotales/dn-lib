@@ -488,7 +488,7 @@ Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map) -> U
 Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error<E>, U>! factory) -> U
 Neotales.Results.ValueResult<T, E>.Map<U>(System.Func<T, U>! map, System.Func<U>! factory) -> U
 Neotales.Results.ValueResult<T, E>.MapEither<U>(System.Func<T, U>! map, System.Func<Neotales.Results.Error<E>, U>! errorMap) -> U
-Neotales.Results.ValueResult<T, E>.MapError<U>(System.Func<E, U>! map) -> U
+Neotales.Results.ValueResult<T, E>.MapErrorValue<U>(System.Func<E, U>! map) -> U
 Neotales.Results.ValueResult<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map) -> U
 Neotales.Results.ValueResult<T, E>.MapError<U>(System.Func<Neotales.Results.Error<E>, U>! map, System.Func<U>! factory) -> U
 Neotales.Results.ValueResult<T, E>.MapResult<U, V>(System.Func<T, U>! mapValue, System.Func<Neotales.Results.Error<E>, Neotales.Results.Error<V>>! mapError) -> Neotales.Results.ValueResult<U, V>

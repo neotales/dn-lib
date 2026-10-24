@@ -274,11 +274,16 @@ namespace Neotales.Results
             return factory();
         }
 
-        /// <summary>Maps the error payload when this result is in error state.</summary>
+        /// <summary>Maps the raw error payload when this result is in error state.</summary>
         /// <typeparam name="U">Mapped error payload type.</typeparam>
         /// <param name="map">Error payload mapping function.</param>
         /// <returns>The mapped error payload, or default for success.</returns>
-        public U MapError<U>(Func<E, U> map)
+        /// <remarks>
+        /// The distinct name avoids ambiguity with <see cref="MapError{U}(Func{Error{E}, U})"/>
+        /// for untyped lambdas. The reference <see cref="Result{T, E}"/> retains its existing
+        /// overload; aligning the two names requires a separate compatibility design.
+        /// </remarks>
+        public U MapErrorValue<U>(Func<E, U> map)
             => this.ok ? default! : map(this.error.Value);
 
         /// <summary>

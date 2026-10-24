@@ -54,7 +54,8 @@ namespace Neotales.Results
         /// <summary>Returns the value or throws an exception with a custom message.</summary>
         /// <param name="message">Message used if the result is an error.</param>
         /// <returns>The result value or error described by this member.</returns>
-        public T Expect(string message) => this.hasValue ? this.value! : throw new ResultException(message, this.error);
+        public T Expect(string message)
+            => this.hasValue ? this.value! : throw new ResultException(message, (object)this.error);
 
         /// <summary>Returns the value or throws the error.</summary>
         /// <returns>The result value or error described by this member.</returns>
@@ -147,8 +148,14 @@ namespace Neotales.Results
         /// <inheritdoc/>
         bool IResult<T>.TryGetError(out IError error)
         {
+            if (this.hasValue)
+            {
+                error = default!;
+                return false;
+            }
+
             error = this.error;
-            return this.hasValue is false;
+            return true;
         }
 
         /// <inheritdoc/>
@@ -187,7 +194,13 @@ namespace Neotales.Results
         /// <param name="result">The source value result.</param>
         /// <returns>The equivalent typed-error value result.</returns>
         public static implicit operator ValueResult<T, Exception>(ValueResult<T> result)
-            => result.hasValue ? new(result.value!) : new(Error<Exception>.From(result.error.Exception ?? result.error.ToException(), result.error.Message, result.error.Code));
+            => result.hasValue
+                ? new(result.value!)
+                : new(Error<Exception>.From(
+                    result.error.Exception ?? result.error.ToException(),
+                    (IError)result.error,
+                    result.error.Message,
+                    result.error.Code));
 
         /// <summary>Converts a success value to a value result.</summary>
         /// <param name="value">The success value.</param>
