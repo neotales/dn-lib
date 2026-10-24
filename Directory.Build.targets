@@ -11,6 +11,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageReleaseNotesFile>CHANGELOG.md</PackageReleaseNotesFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <PackageOutputPath>$(MSBuildThisFileDirectory).artifacts/packages/</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
