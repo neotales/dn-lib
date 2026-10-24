@@ -33,13 +33,15 @@ The runtime primitives the other packages in this repository are built on.
 
 - It does not resolve configuration. `Env` reads process environment variables
   and expands references inside a string; it does not read an appsettings file,
-  a `.env` file or a user secrets store. That is
-  [Neotales.DotEnv](../DotEnv/README.md).
+  a `.env` file or a user secrets store. A separate DotEnv package is deferred
+  and is not part of this repository import.
 - It does not run a process. `Neotales.Exec.CommandArgs` and `CommandLexer`
   parse a command line into arguments and tokens; nothing here starts a process.
-  That is [Neotales.Exec](../Exec/README.md).
+  A separate process-execution package is deferred and is not part of this
+  repository import.
 - It does not store a secret. There is no masking, generation or credential
-  store here. That is [Neotales.Secrets](../Secrets/README.md).
+  store here. A separate secrets package is deferred and is not part of this
+  repository import.
 - It is not a general purpose collections library. The map and list types exist
   because this repository needs an ordered map and an object valued map with a
   single shape across areas, not to replace `Dictionary<TKey, TValue>`.
@@ -73,10 +75,10 @@ Env.PrependPath("/opt/tools/bin");
 
 ## Compatibility
 
-Windows, Linux and macOS. The `Chmod`, `Chown` and `LStat` members are marked
+The library has platform-specific code for Windows, Linux and macOS. This import
+was validated on Linux only; other platforms have not been tested here. The
+`Chmod`, `Chown` and `LStat` members are marked
 `UnsupportedOSPlatform("windows")`.
 
-Part of the `core` group, released with
-[Neotales.Colors.Primitives](../Colors.Primitives/README.md),
-[Neotales.Ansi](../Ansi/README.md) and
-[Neotales.Versioning](../Versioning/README.md) under the `core-v` tag.
+This initial repository import contains Neotales.Core only. Related packages
+and any coordinated group release/tag arrangement are deferred.

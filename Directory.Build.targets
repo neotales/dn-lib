@@ -26,8 +26,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
     <PackageReference Include="MinVer" PrivateAssets="all" />
-    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
-    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />
     <None Include="README.md" Pack="true" PackagePath="/" />
     <None Include="CHANGELOG.md" Pack="true" PackagePath="/" />

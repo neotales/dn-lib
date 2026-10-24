@@ -48,7 +48,7 @@ namespace Neotales
                 if (OperatingSystem.IsWindows() && paths[^1].EqualFold(path))
                     return;
 
-                if (paths[^1].Equals(path))
+                if (paths[^1].Equals(path, StringComparison.Ordinal))
                     return;
             }
 
@@ -215,7 +215,7 @@ namespace Neotales
             {
                 foreach (var p in paths)
                 {
-                    if (p.Equals(path))
+                    if (p.Equals(path, StringComparison.Ordinal))
                         return true;
                 }
             }
@@ -268,7 +268,7 @@ namespace Neotales
                 if (OperatingSystem.IsWindows() && paths[0].EqualFold(path))
                     return;
 
-                if (paths[0].Equals(path))
+                if (paths[0].Equals(path, StringComparison.Ordinal))
                     return;
             }
 
@@ -310,7 +310,7 @@ namespace Neotales
                 if (OperatingSystem.IsWindows() && p.EqualsFold(path))
                     continue;
 
-                if (p.Equals(path))
+                if (p.Equals(path, StringComparison.Ordinal))
                     continue;
 
                 newPaths.Add(p);

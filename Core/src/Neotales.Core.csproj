@@ -75,10 +75,8 @@ It does not resolve configuration files, and it does not manage a process.</Desc
 
   <ItemGroup Label="Shared sources">
     <!--
-      The unix bindings live in the group's shared source folder rather than in
-      this project, because they are interop declarations with no dependency of
-      their own. The folder is std/core/Common/src, declared in
-      eng/groups/core.json as kind shared.
+      The unix bindings are shared source files in cmn/src. They are compiled
+      into this package through explicit links; cmn is not a runtime library.
     -->
     <Compile Include="$(MSBuildThisFileDirectory)../../cmn/src/ffi/unix/libc/chown.cs" Link="FFI/Unix/chown.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)../../cmn/src/ffi/unix/libc/chmod.cs" Link="FFI/Unix/chmod.cs" />
