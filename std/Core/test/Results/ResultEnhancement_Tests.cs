@@ -93,6 +93,7 @@ namespace Neotales.Results.Tests
             Assert.Equal(error, fromError.Value);
             Assert.Equal("prefix raw", unknown.Message);
             Assert.Equal("context", Error.From("context").ToException().Message);
+            Assert.Equal("typed", Error<int>.From(7, "typed").ToException().Message);
             Assert.Same(cause, ResultException.FromError(cause).InnerException);
             Assert.Equal("Unknown error:", ResultException.FromUnknown(null).Message);
             Assert.Throws<ArgumentNullException>(() => ResultException.FromException(null!));
