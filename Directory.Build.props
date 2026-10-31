@@ -18,5 +18,12 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
     <ArtifactsPath>$(MSBuildThisFileDirectory).artifacts/</ArtifactsPath>
+    <!--
+      Stable package version and the assembly version. CI builds on dev publish
+      0.0.0-build-yyyyMMdd.rN instead. A release tag vYYYY.M.D-r.N publishes this
+      version unchanged; -alpha.N, -beta.N, and -rc.N are appended to it.
+      eng/scripts/bump-version.cs is the editor for this value.
+    -->
+    <Version>0.0.0</Version>
   </PropertyGroup>
 </Project>

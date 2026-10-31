@@ -1,0 +1,199 @@
+#!/usr/bin/env dotnet
+#:property GenerateDocumentationFile=true
+#:property TreatWarningsAsErrors=true
+
+// CI builds use 0.0.0-build-yyyyMMdd.rN. Release tags use the assembly version
+// in Directory.Build.props. A -r.N tag publishes that version unchanged. An
+// -alpha.N, -beta.N, or -rc.N tag appends that label.
+using System.Globalization;
+using System.Text.RegularExpressions;
+
+return Run(args);
+
+static int Run(string[] args)
+{
+    if (args.Length == 0 || args[0] is "-h" or "--help" or "help")
+    {
+        Console.WriteLine("""
+            usage:
+              package-version ci --date yyyyMMdd --revision N
+              package-version tag <vYYYY.M.D-r.N|alpha.N|beta.N|rc.N> [--version X.Y.Z]
+              package-version check
+            """);
+        return args.Length == 0 ? 1 : 0;
+    }
+
+    try
+    {
+        switch (args[0])
+        {
+            case "check":
+                Check();
+                Console.WriteLine("package-version: clean");
+                return 0;
+            case "ci":
+                Console.WriteLine(CiVersion(Option(args, "date"), Option(args, "revision")));
+                return 0;
+            case "tag":
+                if (args.Length < 2)
+                {
+                    throw new InvalidOperationException("tag requires the git tag.");
+                }
+
+                var version = Optional(args, "version") ?? ReadAssemblyVersion();
+                Console.WriteLine(TagVersion(args[1], version));
+                return 0;
+            default:
+                throw new InvalidOperationException($"unknown command {args[0]}.");
+        }
+    }
+    catch (Exception ex) when (ex is InvalidOperationException or FormatException)
+    {
+        Console.Error.WriteLine($"package-version: {ex.Message}");
+        return 1;
+    }
+}
+
+static string CiVersion(string date, string revision)
+{
+    if (!Regex.IsMatch(date, @"^\d{8}$", RegexOptions.CultureInvariant))
+    {
+        throw new FormatException($"date '{date}' is not yyyyMMdd.");
+    }
+
+    var month = int.Parse(date.AsSpan(4, 2), CultureInfo.InvariantCulture);
+    var day = int.Parse(date.AsSpan(6, 2), CultureInfo.InvariantCulture);
+    if (month is < 1 or > 12 || day is < 1 or > 31)
+    {
+        throw new FormatException($"date '{date}' is not a calendar day.");
+    }
+
+    if (!Regex.IsMatch(revision, @"^[1-9]\d*$", RegexOptions.CultureInvariant))
+    {
+        throw new FormatException($"revision '{revision}' is not a positive integer.");
+    }
+
+    return $"0.0.0-build-{date}.r{revision}";
+}
+
+static string TagVersion(string tag, string assemblyVersion)
+{
+    _ = AssemblyVersion(assemblyVersion);
+    var match = Regex.Match(
+        tag,
+        @"^v(?<year>\d{4})\.(?<month>\d{1,2})\.(?<day>\d{1,2})-(?<channel>r\.\d+|alpha\.\d+|beta\.\d+|rc\.\d+)$",
+        RegexOptions.CultureInvariant);
+    if (!match.Success)
+    {
+        throw new FormatException(
+            $"tag '{tag}' is not vYYYY.M.D-r.N, vYYYY.M.D-alpha.N, vYYYY.M.D-beta.N, or vYYYY.M.D-rc.N.");
+    }
+
+    var month = int.Parse(match.Groups["month"].ValueSpan, CultureInfo.InvariantCulture);
+    var day = int.Parse(match.Groups["day"].ValueSpan, CultureInfo.InvariantCulture);
+    if (month is < 1 or > 12 || day is < 1 or > 31)
+    {
+        throw new FormatException($"tag '{tag}' has a month or day outside the calendar.");
+    }
+
+    var channel = match.Groups["channel"].Value;
+    return channel.StartsWith("r.", StringComparison.Ordinal)
+        ? assemblyVersion
+        : $"{assemblyVersion}-{channel}";
+}
+
+static string ReadAssemblyVersion()
+{
+    var props = Path.Combine(FindRepositoryRoot(), "Directory.Build.props");
+    var text = File.ReadAllText(props);
+    var matches = Regex.Matches(text, @"(?<![A-Za-z])<Version>\s*([^<]+?)\s*</Version>", RegexOptions.CultureInvariant);
+    if (matches.Count != 1)
+    {
+        throw new InvalidOperationException($"expected one <Version> in {props}, found {matches.Count}.");
+    }
+
+    return AssemblyVersion(matches[0].Groups[1].Value);
+}
+
+static string AssemblyVersion(string version)
+{
+    if (!Regex.IsMatch(version, @"^\d+\.\d+\.\d+$", RegexOptions.CultureInvariant))
+    {
+        throw new FormatException($"assembly version '{version}' is not Major.Minor.Patch.");
+    }
+
+    return version;
+}
+
+static void Check()
+{
+    Expect(CiVersion("20261031", "1"), "0.0.0-build-20261031.r1");
+    Expect(TagVersion("v2026.10.31-r.1", "0.0.0"), "0.0.0");
+    Expect(TagVersion("v2026.10.31-alpha.0", "0.0.0"), "0.0.0-alpha.0");
+    Expect(TagVersion("v2026.11.3-beta.3", "0.5.0"), "0.5.0-beta.3");
+    Expect(TagVersion("v2026.11.3-rc.1", "0.5.0"), "0.5.0-rc.1");
+    ExpectThrow(() => TagVersion("v2026.10.31", "0.0.0"));
+    ExpectThrow(() => TagVersion("v2026.10.31-r1", "0.0.0"));
+    ExpectThrow(() => TagVersion("v2026.10.31-preview.1", "0.0.0"));
+    ExpectThrow(() => CiVersion("20261301", "1"));
+    ExpectThrow(() => CiVersion("20261031", "0"));
+    _ = AssemblyVersion(ReadAssemblyVersion());
+}
+
+static void Expect(string actual, string expected)
+{
+    if (!string.Equals(actual, expected, StringComparison.Ordinal))
+    {
+        throw new InvalidOperationException($"expected {expected}, got {actual}.");
+    }
+}
+
+static void ExpectThrow(Action action)
+{
+    try
+    {
+        action();
+    }
+    catch (FormatException)
+    {
+        return;
+    }
+
+    throw new InvalidOperationException("expected the version rule to reject the input.");
+}
+
+static string Option(string[] args, string name)
+{
+    return Optional(args, name) ?? throw new InvalidOperationException($"missing --{name}.");
+}
+
+static string? Optional(string[] args, string name)
+{
+    var flag = "--" + name;
+    for (var i = 0; i < args.Length - 1; i++)
+    {
+        if (string.Equals(args[i], flag, StringComparison.Ordinal))
+        {
+            return args[i + 1];
+        }
+    }
+
+    return null;
+}
+
+static string FindRepositoryRoot()
+{
+    var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+    while (directory is not null)
+    {
+        if (File.Exists(Path.Combine(directory.FullName, "global.json"))
+            && Directory.Exists(Path.Combine(directory.FullName, "eng")))
+        {
+            return directory.FullName;
+        }
+
+        directory = directory.Parent;
+    }
+
+    throw new InvalidOperationException("repository root was not found from the working directory.");
+}
