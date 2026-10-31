@@ -1,0 +1,24 @@
+<Project>
+  <!--
+    File-based programs live in this directory. Import the repository props, then
+    keep them out of the library lock file. The SDK's implicit ILCompiler package
+    is runtime-specific, and a lock generated on Linux rejects Windows and macOS.
+  -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <!--
+      These programs run on the host dotnet. A runtime identifier makes the
+      lock file specific to the machine that wrote it, so Windows and macOS
+      reject a lock generated on Linux.
+    -->
+    <IsRidAgnostic>true</IsRidAgnostic>
+    <SelfContained>false</SelfContained>
+    <UseCurrentRuntimeIdentifier>false</UseCurrentRuntimeIdentifier>
+    <PublishAot>false</PublishAot>
+    <EnableAotAnalyzer>false</EnableAotAnalyzer>
+    <IsAotCompatible>false</IsAotCompatible>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+    <RestoreLockedMode>false</RestoreLockedMode>
+  </PropertyGroup>
+</Project>

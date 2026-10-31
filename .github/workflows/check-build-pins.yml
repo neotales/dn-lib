@@ -3,7 +3,7 @@
 # This is its own workflow so a build does not repeat the check on every
 # operating system. The script asks every host and architecture from one
 # runner. A tag-pinned action is still rejected by eng/scripts/check-action-pins.cs
-# in the std Core workflow.
+# in the std workflow.
 name: check build pins
 
 on:

@@ -1,18 +1,24 @@
-# Publish a tagged release. The tag date identifies the release. The package
-# version comes from Directory.Build.props: vYYYY.M.D-r.N uses that version as
-# is, and -alpha.N, -beta.N, and -rc.N are appended. Those versions stay on
-# GitHub Packages. They also go to nuget.org unless SKIP_NUGET_ORG is true
-# or the manual run sets skip_nuget_org.
+# Publish a tagged release for one area. The tag is <area>/vYYYY.M.D-<channel>,
+# for example std/v2026.10.31-r.1. The area selects <area>.slnx. Later areas
+# use the same shape: extensions, entityframework, ssh, and others.
+#
+# Each project keeps its own Version. A stable -r.N tag packs those versions
+# unchanged. -alpha.N, -beta.N, and -rc.N are appended as a version suffix.
+# Packages already on a feed at that id and version are left there:
+# dotnet nuget push --skip-duplicate treats the 409 as a warning. A package
+# that changed still needs a new version; the feed will not replace one.
+# GitHub Packages always receives the push. nuget.org is skipped when
+# SKIP_NUGET_ORG is true or the manual run sets skip_nuget_org.
 name: release
 
 on:
   push:
     tags:
-      - "v[0-9]*"
+      - "**/v[0-9]*"
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v2026.10.31-r.1
+        description: Release tag, for example std/v2026.10.31-r.1
         required: true
         type: string
       skip_nuget_org:
@@ -59,28 +65,45 @@ jobs:
           RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
+          area="$(dotnet ./eng/scripts/package-version.cs area "$RELEASE_TAG")"
           version="$(dotnet ./eng/scripts/package-version.cs tag "$RELEASE_TAG")"
+          label="$(dotnet ./eng/scripts/package-version.cs label "$RELEASE_TAG")"
+          solution="${area}.slnx"
+          if [ ! -f "$solution" ]; then
+            echo "No solution ${solution} for area ${area}."
+            exit 1
+          fi
+          echo "area=${area}" >> "$GITHUB_OUTPUT"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
-          echo "${version}"
+          echo "label=${label}" >> "$GITHUB_OUTPUT"
+          echo "solution=${solution}" >> "$GITHUB_OUTPUT"
+          echo "${area} ${version}"
 
       - name: Restore
-        run: dotnet restore std.slnx --locked-mode
+        run: dotnet restore "${{ steps.package_version.outputs.solution }}" --locked-mode
 
       - name: Build
-        run: dotnet build std.slnx -c Release --no-restore
+        run: dotnet build "${{ steps.package_version.outputs.solution }}" -c Release --no-restore
 
       - name: Test
-        run: dotnet test std.slnx -c Release --no-build
+        run: dotnet test "${{ steps.package_version.outputs.solution }}" -c Release --no-build
 
       - name: Pack
         env:
-          PACKAGE_VERSION: ${{ steps.package_version.outputs.version }}
-        run: dotnet pack std.slnx -c Release --no-build -p:PackageVersion="$PACKAGE_VERSION"
+          SOLUTION: ${{ steps.package_version.outputs.solution }}
+          VERSION_LABEL: ${{ steps.package_version.outputs.label }}
+        run: |
+          set -euo pipefail
+          if [ -n "${VERSION_LABEL}" ]; then
+            dotnet pack "$SOLUTION" -c Release --no-build -p:VersionSuffix="$VERSION_LABEL"
+          else
+            dotnet pack "$SOLUTION" -c Release --no-build
+          fi
 
       - name: Upload packages
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: packages-${{ steps.package_version.outputs.version }}
+          name: packages-${{ steps.package_version.outputs.area }}-${{ steps.package_version.outputs.version }}
           path: .artifacts/packages/*
           if-no-files-found: error
           retention-days: 90

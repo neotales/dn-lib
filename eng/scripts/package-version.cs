@@ -2,9 +2,10 @@
 #:property GenerateDocumentationFile=true
 #:property TreatWarningsAsErrors=true
 
-// CI builds use 0.0.0-build-yyyyMMdd.rN. Release tags use the assembly version
-// in Directory.Build.props. A -r.N tag publishes that version unchanged. An
-// -alpha.N, -beta.N, or -rc.N tag appends that label.
+// CI builds use 0.0.0-build-yyyyMMdd.rN. A release tag names an area and a
+// channel: std/vYYYY.M.D-r.N publishes the assembly version unchanged, and
+// -alpha.N, -beta.N, or -rc.N is appended. Further areas use the same shape,
+// for example extensions, entityframework, and ssh.
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -17,7 +18,9 @@ static int Run(string[] args)
         Console.WriteLine("""
             usage:
               package-version ci --date yyyyMMdd --revision N
-              package-version tag <vYYYY.M.D-r.N|alpha.N|beta.N|rc.N> [--version X.Y.Z]
+              package-version tag <area/vYYYY.M.D-r.N|alpha.N|beta.N|rc.N> [--version X.Y.Z]
+              package-version area <area/vYYYY.M.D-...>
+              package-version label <area/vYYYY.M.D-...>
               package-version check
             """);
         return args.Length == 0 ? 1 : 0;
@@ -42,6 +45,22 @@ static int Run(string[] args)
 
                 var version = Optional(args, "version") ?? ReadAssemblyVersion();
                 Console.WriteLine(TagVersion(args[1], version));
+                return 0;
+            case "area":
+                if (args.Length < 2)
+                {
+                    throw new InvalidOperationException("area requires the git tag.");
+                }
+
+                Console.WriteLine(TagArea(args[1]));
+                return 0;
+            case "label":
+                if (args.Length < 2)
+                {
+                    throw new InvalidOperationException("label requires the git tag.");
+                }
+
+                Console.WriteLine(TagLabel(args[1]));
                 return 0;
             default:
                 throw new InvalidOperationException($"unknown command {args[0]}.");
@@ -78,15 +97,32 @@ static string CiVersion(string date, string revision)
 
 static string TagVersion(string tag, string assemblyVersion)
 {
-    _ = AssemblyVersion(assemblyVersion);
+    var version = AssemblyVersion(assemblyVersion);
+    var label = TagLabel(tag);
+    return label.Length == 0 ? version : $"{version}-{label}";
+}
+
+static string TagArea(string tag)
+{
+    return ParseTag(tag).Groups["area"].Value;
+}
+
+static string TagLabel(string tag)
+{
+    var channel = ParseTag(tag).Groups["channel"].Value;
+    return channel.StartsWith("r.", StringComparison.Ordinal) ? "" : channel;
+}
+
+static Match ParseTag(string tag)
+{
     var match = Regex.Match(
         tag,
-        @"^v(?<year>\d{4})\.(?<month>\d{1,2})\.(?<day>\d{1,2})-(?<channel>r\.\d+|alpha\.\d+|beta\.\d+|rc\.\d+)$",
+        @"^(?<area>[a-z][a-z0-9]*)/v(?<year>\d{4})\.(?<month>\d{1,2})\.(?<day>\d{1,2})-(?<channel>r\.\d+|alpha\.\d+|beta\.\d+|rc\.\d+)$",
         RegexOptions.CultureInvariant);
     if (!match.Success)
     {
         throw new FormatException(
-            $"tag '{tag}' is not vYYYY.M.D-r.N, vYYYY.M.D-alpha.N, vYYYY.M.D-beta.N, or vYYYY.M.D-rc.N.");
+            $"tag '{tag}' is not <area>/vYYYY.M.D-r.N, <area>/vYYYY.M.D-alpha.N, <area>/vYYYY.M.D-beta.N, or <area>/vYYYY.M.D-rc.N. The area names the solution, for example std, extensions, entityframework, or ssh.");
     }
 
     var month = int.Parse(match.Groups["month"].ValueSpan, CultureInfo.InvariantCulture);
@@ -96,10 +132,7 @@ static string TagVersion(string tag, string assemblyVersion)
         throw new FormatException($"tag '{tag}' has a month or day outside the calendar.");
     }
 
-    var channel = match.Groups["channel"].Value;
-    return channel.StartsWith("r.", StringComparison.Ordinal)
-        ? assemblyVersion
-        : $"{assemblyVersion}-{channel}";
+    return match;
 }
 
 static string ReadAssemblyVersion()
@@ -128,13 +161,18 @@ static string AssemblyVersion(string version)
 static void Check()
 {
     Expect(CiVersion("20261031", "1"), "0.0.0-build-20261031.r1");
-    Expect(TagVersion("v2026.10.31-r.1", "0.0.0"), "0.0.0");
-    Expect(TagVersion("v2026.10.31-alpha.0", "0.0.0"), "0.0.0-alpha.0");
-    Expect(TagVersion("v2026.11.3-beta.3", "0.5.0"), "0.5.0-beta.3");
-    Expect(TagVersion("v2026.11.3-rc.1", "0.5.0"), "0.5.0-rc.1");
-    ExpectThrow(() => TagVersion("v2026.10.31", "0.0.0"));
-    ExpectThrow(() => TagVersion("v2026.10.31-r1", "0.0.0"));
-    ExpectThrow(() => TagVersion("v2026.10.31-preview.1", "0.0.0"));
+    Expect(TagVersion("std/v2026.10.31-r.1", "0.0.0"), "0.0.0");
+    Expect(TagVersion("std/v2026.10.31-alpha.0", "0.0.0"), "0.0.0-alpha.0");
+    Expect(TagVersion("std/v2026.11.3-beta.3", "0.5.0"), "0.5.0-beta.3");
+    Expect(TagVersion("entityframework/v2026.11.3-rc.1", "0.5.0"), "0.5.0-rc.1");
+    Expect(TagArea("std/v2026.10.31-r.1"), "std");
+    Expect(TagArea("ssh/v2026.11.3-beta.3"), "ssh");
+    Expect(TagLabel("std/v2026.10.31-r.1"), "");
+    Expect(TagLabel("extensions/v2026.10.31-alpha.0"), "alpha.0");
+    ExpectThrow(() => TagVersion("v2026.10.31-r.1", "0.0.0"));
+    ExpectThrow(() => TagVersion("std/v2026.10.31", "0.0.0"));
+    ExpectThrow(() => TagVersion("std/v2026.10.31-r1", "0.0.0"));
+    ExpectThrow(() => TagVersion("std/v2026.10.31-preview.1", "0.0.0"));
     ExpectThrow(() => CiVersion("20261301", "1"));
     ExpectThrow(() => CiVersion("20261031", "0"));
     _ = AssemblyVersion(ReadAssemblyVersion());

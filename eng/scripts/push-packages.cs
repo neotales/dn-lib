@@ -128,6 +128,9 @@ static int Push(string[] files, string source, string config)
         start.ArgumentList.Add(source);
         start.ArgumentList.Add("--configfile");
         start.ArgumentList.Add(config);
+        // nuget.org and GitHub Packages answer 409 when that id and version
+        // already exist. Skip those packages and keep pushing the rest, so an
+        // area release can contain packages that were already shipped.
         start.ArgumentList.Add("--skip-duplicate");
 
         using var process = Process.Start(start) ?? throw new InvalidOperationException("dotnet nuget push did not start.");

@@ -1,6 +1,7 @@
-# std/Core restore, build, test, format, and pack through std.slnx.
+# std restore, build, test, format, and pack through std.slnx.
 #
-# One solution command covers every project in std, so the SDK schedules those
+# The solution is the whole standard-library area, not one project. One
+# solution command covers every project in std, so the SDK schedules those
 # projects together instead of a step per project. After restore, the same
 # solution is audited for known NuGet vulnerabilities, including transitive
 # packages. Packed nupkgs are uploaded as workflow artifacts. Dev builds also
@@ -11,7 +12,7 @@
 # Third-party actions are pinned to commit SHAs. The version in the trailing
 # comment is what a reviewer checks. eng/scripts/check-action-pins.cs fails a
 # tag reference and a SHA that does not name its version.
-name: std Core ci
+name: std ci
 
 on:
   pull_request:
@@ -19,11 +20,25 @@ on:
       - "**"
     paths:
       - "std/**"
+      - "std.slnx"
+      - ".github/workflows/std-ci.yml"
+      - "eng/scripts/**"
+      - "Directory.Build.props"
+      - "Directory.Build.targets"
+      - "Directory.Packages.props"
+      - "global.json"
   push:
     branches:
       - "**"
     paths:
       - "std/**"
+      - "std.slnx"
+      - ".github/workflows/std-ci.yml"
+      - "eng/scripts/**"
+      - "Directory.Build.props"
+      - "Directory.Build.targets"
+      - "Directory.Packages.props"
+      - "global.json"
   workflow_dispatch:
 
 permissions:
@@ -31,7 +46,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: std-core-${{ github.ref }}
+  group: std-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -44,7 +59,7 @@ env:
 
 jobs:
   build:
-    name: Core (${{ matrix.os }})
+    name: std (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     defaults:
