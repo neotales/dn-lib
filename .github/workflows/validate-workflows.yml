@@ -1,0 +1,82 @@
+# Validate workflow files and the SDK pin in global.json.
+#
+# Workflow lint and the SDK pin run here, once, on Linux. std CI does not
+# repeat them on every operating system. CD workflows push packages to NuGet;
+# this workflow does not publish.
+#
+# Third-party actions are pinned to commit SHAs. The version in the trailing
+# comment is what a reviewer checks. eng/scripts/check-action-pins.cs fails a
+# tag reference and a SHA that does not name its version.
+name: validate workflows
+
+on:
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/**"
+      - "eng/scripts/**"
+      - "global.json"
+      - "std/**"
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/**"
+      - "eng/scripts/**"
+      - "global.json"
+      - "std/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-workflows-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+
+jobs:
+  sdk:
+    name: SDK pin
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          # setup-dotnet installs into /usr/share/dotnet unless this is set.
+          # That directory is not writable on every runner. The workspace is.
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: The pinned SDK can be installed
+        run: dotnet ./eng/scripts/check-sdk-pin.cs
+
+  workflows:
+    name: workflow lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: Lint workflows
+        run: |
+          dotnet ./eng/scripts/check-action-pins.cs .github/workflows/*.yml
+          bash eng/scripts/actionlint.sh .github/workflows/*.yml

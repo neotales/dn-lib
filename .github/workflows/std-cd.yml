@@ -1,0 +1,149 @@
+# Continuous delivery for the standard library: push packed packages to NuGet.
+#
+# This workflow is std only. Later areas get their own CD workflow, for
+# example extensions-cd.yml, so a tag for one area does not publish another.
+# The tag is std/vYYYY.M.D-<channel>, for example std/v2026.10.31-r.1.
+# The area selects std.slnx.
+#
+# CD means pushing to NuGet. GitHub Packages always receives the push.
+# nuget.org uses trusted publishing. The job runs in the production
+# environment, which is the environment on the neotales_std_publish policy.
+# NuGet/login exchanges the GitHub OIDC token for a one-hour API key.
+# nuget.org is skipped when SKIP_NUGET_ORG is true or the manual run sets
+# skip_nuget_org.
+#
+# Each project keeps its own Version. A stable -r.N tag packs those versions
+# unchanged. -alpha.N, -beta.N, and -rc.N are passed as ReleaseLabel, which
+# sets PackageVersion to that project's Version plus the label. VersionSuffix
+# does not: an explicit Version ignores it and the package stays stable.
+# Packages already on a feed at that id and version are left there:
+# dotnet nuget push --skip-duplicate treats the 409 as a warning. A package
+# that changed still needs a new version; the feed will not replace one.
+name: std cd
+
+on:
+  push:
+    tags:
+      - "std/v[0-9]*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, for example std/v2026.10.31-r.1
+        required: true
+        type: string
+      skip_nuget_org:
+        description: Skip publishing this release to nuget.org
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+concurrency:
+  group: std-cd-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: Package version
+        id: package_version
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          area="$(dotnet ./eng/scripts/package-version.cs area "$RELEASE_TAG")"
+          if [ "$area" != "std" ]; then
+            echo "std-cd.yml pushes the std area to NuGet. This tag is ${area}."
+            exit 1
+          fi
+          version="$(dotnet ./eng/scripts/package-version.cs tag "$RELEASE_TAG")"
+          label="$(dotnet ./eng/scripts/package-version.cs label "$RELEASE_TAG")"
+          solution="${area}.slnx"
+          if [ ! -f "$solution" ]; then
+            echo "No solution ${solution} for area ${area}."
+            exit 1
+          fi
+          {
+            echo "area=${area}"
+            echo "version=${version}"
+            echo "label=${label}"
+            echo "solution=${solution}"
+          } >> "$GITHUB_OUTPUT"
+          echo "${area} ${version}"
+
+      - name: Restore
+        run: dotnet restore "${{ steps.package_version.outputs.solution }}" --locked-mode
+
+      - name: Build
+        run: dotnet build "${{ steps.package_version.outputs.solution }}" -c Release --no-restore
+
+      - name: Test
+        run: dotnet test "${{ steps.package_version.outputs.solution }}" -c Release --no-build
+
+      - name: Pack
+        env:
+          SOLUTION: ${{ steps.package_version.outputs.solution }}
+          RELEASE_LABEL: ${{ steps.package_version.outputs.label }}
+        run: dotnet pack "$SOLUTION" -c Release --no-build -p:ReleaseLabel="$RELEASE_LABEL"
+
+      - name: Upload packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: packages-${{ steps.package_version.outputs.area }}-${{ steps.package_version.outputs.version }}
+          path: .artifacts/packages/*
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: dotnet ./eng/scripts/push-packages.cs github .artifacts/packages
+
+      - name: NuGet login
+        id: nuget_login
+        if: vars.SKIP_NUGET_ORG != 'true' && (github.event_name != 'workflow_dispatch' || inputs.skip_nuget_org == false)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          # nuget.org profile that created neotales_std_publish. The login
+          # action matches the policy creator.
+          user: neotales
+
+      - name: Publish to nuget.org
+        env:
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
+          SKIP_NUGET_ORG: ${{ vars.SKIP_NUGET_ORG }}
+          SKIP_NUGET_ORG_INPUT: ${{ github.event_name == 'workflow_dispatch' && inputs.skip_nuget_org && 'true' || 'false' }}
+        run: |
+          set -euo pipefail
+          if [ "${SKIP_NUGET_ORG}" = "true" ] || [ "${SKIP_NUGET_ORG_INPUT}" = "true" ]; then
+            echo "Skipping nuget.org."
+            exit 0
+          fi
+          dotnet ./eng/scripts/push-packages.cs nuget .artifacts/packages

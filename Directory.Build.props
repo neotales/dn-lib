@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+    <Fx>net11.0</Fx>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <WarningLevel>9999</WarningLevel>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <TreatWarningsAsErrors Condition="'$(CI)' == 'true'">true</TreatWarningsAsErrors>
+    <MSBuildTreatWarningsAsErrors Condition="'$(CI)' == 'true'">true</MSBuildTreatWarningsAsErrors>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
+    <ArtifactsPath>$(MSBuildThisFileDirectory).artifacts/</ArtifactsPath>
+    <!--
+      Stable package version and the assembly version. CI builds on dev publish
+      0.0.0-build-yyyyMMdd.rN instead. A release tag such as std/vYYYY.M.D-r.N
+      publishes this version unchanged; -alpha.N, -beta.N, and -rc.N are appended
+      to the package version through ReleaseLabel. The assembly version stays
+      this value. The area (std, and later extensions, entityframework, ssh, and others)
+      selects which solution is packed. A project can override Version when it
+      ships on its own.
+      eng/scripts/bump-version.cs is the editor for this value.
+    -->
+    <Version>0.0.0</Version>
+  </PropertyGroup>
+</Project>

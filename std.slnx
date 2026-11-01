@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="std/Core/src/Neotales.Core.csproj" />
+  <Project Path="std/Core/test/Neotales.Core.Tests.csproj" />
+</Solution>

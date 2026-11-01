@@ -1,0 +1,197 @@
+# std restore, build, test, format, and pack through std.slnx.
+#
+# The solution is the whole standard-library area, not one project. One
+# solution command covers every project in std, so the SDK schedules those
+# projects together instead of a step per project. Path filters include
+# cmn/src and stylecop.json: Core compiles that shared source, and the
+# analyzer configuration is shared. The Linux job audits the
+# restored solution for known NuGet vulnerabilities, including transitive
+# packages, then packs and uploads one workflow artifact. Windows and macOS
+# compile and run the tests; they do not pack or upload. Dev builds also
+# publish 0.0.0-build-yyyyMMdd.rN to GitHub Packages and keep the newest five
+# of those versions. Workflow lint and the SDK pin check are
+# .github/workflows/validate-workflows.yml. std CD pushes packages to NuGet
+# from .github/workflows/std-cd.yml.
+#
+# Third-party actions are pinned to commit SHAs. The version in the trailing
+# comment is what a reviewer checks. eng/scripts/check-action-pins.cs fails a
+# tag reference and a SHA that does not name its version.
+name: std ci
+
+on:
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "std/**"
+      - "cmn/src/**"
+      - "std.slnx"
+      - ".github/workflows/std-ci.yml"
+      - "eng/scripts/**"
+      - "Directory.Build.props"
+      - "Directory.Build.targets"
+      - "Directory.Packages.props"
+      - "global.json"
+      - "stylecop.json"
+  push:
+    branches:
+      - "**"
+    paths:
+      - "std/**"
+      - "cmn/src/**"
+      - "std.slnx"
+      - ".github/workflows/std-ci.yml"
+      - "eng/scripts/**"
+      - "Directory.Build.props"
+      - "Directory.Build.targets"
+      - "Directory.Packages.props"
+      - "global.json"
+      - "stylecop.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: std-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  # A job must not inherit a package cache from another job or from the runner
+  # image. github.workspace is available here; runner is not.
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget
+
+jobs:
+  build:
+    name: std (ubuntu-24.04)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # History is not required for the package version. The version script
+          # reads Directory.Build.props and the workflow run number.
+          fetch-depth: 0
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          # setup-dotnet installs into /usr/share/dotnet unless this is set.
+          # That directory is not writable on every runner. The workspace is.
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: Restore
+        run: dotnet restore std.slnx --locked-mode
+
+      - name: NuGet audit
+        run: |
+          set -euo pipefail
+          report="${RUNNER_TEMP}/nuget-audit.txt"
+          dotnet list std.slnx package --vulnerable --include-transitive --no-restore | tee "$report"
+          if grep -F 'has the following vulnerable packages' "$report" >/dev/null; then
+            echo "NuGet audit found vulnerable packages."
+            exit 1
+          fi
+          if ! grep -F 'has no vulnerable packages' "$report" >/dev/null; then
+            echo "NuGet audit did not report a result for the solution."
+            exit 1
+          fi
+
+      - name: Build
+        run: dotnet build std.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test std.slnx -c Release --no-build
+
+      - name: Format
+        run: dotnet format std.slnx --verify-no-changes --no-restore
+
+      - name: Package version
+        id: package_version
+        env:
+          REVISION: ${{ github.run_number }}
+        run: |
+          set -euo pipefail
+          version="$(dotnet ./eng/scripts/package-version.cs ci --date "$(date -u +%Y%m%d)" --revision "$REVISION")"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "${version}"
+
+      - name: Pack
+        env:
+          PACKAGE_VERSION: ${{ steps.package_version.outputs.version }}
+        run: dotnet pack std.slnx -c Release --no-build -p:PackageVersion="$PACKAGE_VERSION"
+
+      - name: Upload packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: packages-${{ steps.package_version.outputs.version }}
+          path: .artifacts/packages/*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish the dev build to GitHub Packages
+        if: github.ref == 'refs/heads/dev'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          dotnet ./eng/scripts/push-packages.cs github .artifacts/packages
+          dotnet ./eng/scripts/github-packages.cs prune-builds --keep 5 --packages-dir .artifacts/packages
+
+      - name: Check scripts
+        run: |
+          dotnet ./eng/scripts/package-version.cs check
+          dotnet ./eng/scripts/bump-version.cs check
+          dotnet ./eng/scripts/github-packages.cs check
+          dotnet ./eng/scripts/check-action-pins.cs check
+
+  # Windows and macOS exist to run the tests. Compiling there produces the
+  # test assemblies for that runner. Packages are packed and stored only by
+  # the Linux build job.
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-2025
+          - macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          # setup-dotnet installs into /usr/share/dotnet unless this is set.
+          # That directory is not writable on every runner. The workspace is.
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: Restore
+        run: dotnet restore std.slnx --locked-mode
+
+      - name: Build
+        run: dotnet build std.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test std.slnx -c Release --no-build
