@@ -2,7 +2,9 @@
 #
 # The solution is the whole standard-library area, not one project. One
 # solution command covers every project in std, so the SDK schedules those
-# projects together instead of a step per project. The Linux job audits the
+# projects together instead of a step per project. Path filters include
+# cmn/src and stylecop.json: Core compiles that shared source, and the
+# analyzer configuration is shared. The Linux job audits the
 # restored solution for known NuGet vulnerabilities, including transitive
 # packages, then packs and uploads one workflow artifact. Windows and macOS
 # compile and run the tests; they do not pack or upload. Dev builds also
@@ -22,6 +24,7 @@ on:
       - "**"
     paths:
       - "std/**"
+      - "cmn/src/**"
       - "std.slnx"
       - ".github/workflows/std-ci.yml"
       - "eng/scripts/**"
@@ -29,11 +32,13 @@ on:
       - "Directory.Build.targets"
       - "Directory.Packages.props"
       - "global.json"
+      - "stylecop.json"
   push:
     branches:
       - "**"
     paths:
       - "std/**"
+      - "cmn/src/**"
       - "std.slnx"
       - ".github/workflows/std-ci.yml"
       - "eng/scripts/**"
@@ -41,6 +46,7 @@ on:
       - "Directory.Build.targets"
       - "Directory.Packages.props"
       - "global.json"
+      - "stylecop.json"
   workflow_dispatch:
 
 permissions:
