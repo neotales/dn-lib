@@ -17,8 +17,7 @@ The runtime primitives the other packages in this repository are built on.
   honoured, and which shell the substitution runs through.
 - **Collections.** `Neotales.Collections.Generic` has `Map`, `Map<TKey, TValue>`,
   `Map<TValue>`, `OrderedMap` and its two and three type parameter forms,
-  `StringMap`, `OrderedStringMap`, `StringList`, plus the `Inputs` and `Outputs`
-  shapes and their `Empty` implementations.
+  `StringMap`, `OrderedStringMap`, and `StringList`.
 - **Files and IO.** `Neotales.IO` has `TeeTextWriter` and
   `SimpleTeeTextWriter` (write to two writers at once, each with its own leave
   open flag), `DisposableFile` and `DisposableDirectory` (a temporary path that

@@ -1,20 +1,25 @@
-# Publish a tagged release for one area. The tag is <area>/vYYYY.M.D-<channel>,
-# for example std/v2026.10.31-r.1. The area selects <area>.slnx. Later areas
-# use the same shape: extensions, entityframework, ssh, and others.
+# Continuous delivery for the standard library: push packed packages to NuGet.
+#
+# This workflow is std only. Later areas get their own CD workflow, for
+# example extensions-cd.yml, so a tag for one area does not publish another.
+# The tag is std/vYYYY.M.D-<channel>, for example std/v2026.10.31-r.1.
+# The area selects std.slnx.
+#
+# CD means pushing to NuGet. GitHub Packages always receives the push.
+# nuget.org is skipped when SKIP_NUGET_ORG is true or the manual run sets
+# skip_nuget_org.
 #
 # Each project keeps its own Version. A stable -r.N tag packs those versions
 # unchanged. -alpha.N, -beta.N, and -rc.N are appended as a version suffix.
 # Packages already on a feed at that id and version are left there:
 # dotnet nuget push --skip-duplicate treats the 409 as a warning. A package
 # that changed still needs a new version; the feed will not replace one.
-# GitHub Packages always receives the push. nuget.org is skipped when
-# SKIP_NUGET_ORG is true or the manual run sets skip_nuget_org.
-name: release
+name: std cd
 
 on:
   push:
     tags:
-      - "**/v[0-9]*"
+      - "std/v[0-9]*"
   workflow_dispatch:
     inputs:
       tag:
@@ -32,7 +37,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: std-cd-${{ github.ref }}
   cancel-in-progress: false
 
 env:
@@ -66,6 +71,10 @@ jobs:
         run: |
           set -euo pipefail
           area="$(dotnet ./eng/scripts/package-version.cs area "$RELEASE_TAG")"
+          if [ "$area" != "std" ]; then
+            echo "std-cd.yml pushes the std area to NuGet. This tag is ${area}."
+            exit 1
+          fi
           version="$(dotnet ./eng/scripts/package-version.cs tag "$RELEASE_TAG")"
           label="$(dotnet ./eng/scripts/package-version.cs label "$RELEASE_TAG")"
           solution="${area}.slnx"

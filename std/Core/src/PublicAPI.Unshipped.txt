@@ -1,21 +1,4 @@
 #nullable enable
-Neotales.Collections.Generic.EmptyInputs
-Neotales.Collections.Generic.EmptyInputs.Add(string! key, object? value) -> void
-Neotales.Collections.Generic.EmptyInputs.EmptyInputs() -> void
-Neotales.Collections.Generic.EmptyOutputs
-Neotales.Collections.Generic.EmptyOutputs.Add(string! key, object? value) -> void
-Neotales.Collections.Generic.EmptyOutputs.EmptyOutputs() -> void
-Neotales.Collections.Generic.Inputs
-Neotales.Collections.Generic.Inputs.Inputs() -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Inputs.Inputs(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Inputs.Inputs(int capacity) -> void
-Neotales.Collections.Generic.Inputs.Inputs(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
 Neotales.Collections.Generic.Map
 Neotales.Collections.Generic.Map.Map() -> void
 Neotales.Collections.Generic.Map.Map(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
@@ -94,17 +77,6 @@ Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collection
 Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
 Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(int capacity) -> void
 Neotales.Collections.Generic.OrderedStringMap.OrderedStringMap(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Outputs
-Neotales.Collections.Generic.Outputs.Outputs() -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IDictionary<string!, object?>! dictionary, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<(string!, object?)>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, object?>>! collection, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Outputs.Outputs(System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
-Neotales.Collections.Generic.Outputs.Outputs(int capacity) -> void
-Neotales.Collections.Generic.Outputs.Outputs(int capacity, System.Collections.Generic.IEqualityComparer<string!>! comparer) -> void
 Neotales.Collections.Generic.StringList
 Neotales.Collections.Generic.StringList.ContainsFold(string! item) -> bool
 Neotales.Collections.Generic.StringList.IndexOfFold(string! item) -> int
@@ -540,11 +512,6 @@ Neotales.Text.Extras.EncodingMembers
 Neotales.Text.Extras.EncodingMembers.extension(System.Text.Encoding!)
 Neotales.Text.Extras.StringBuilderExtensions
 Neotales.Text.StringBuilderCache
-override Neotales.Collections.Generic.EmptyInputs.IsEmpty.get -> bool
-override Neotales.Collections.Generic.EmptyInputs.IsReadOnly.get -> bool
-override Neotales.Collections.Generic.EmptyInputs.ToString() -> string!
-override Neotales.Collections.Generic.EmptyOutputs.IsEmpty.get -> bool
-override Neotales.Collections.Generic.EmptyOutputs.IsReadOnly.get -> bool
 override Neotales.Exec.CommandArgs.ToString() -> string!
 override Neotales.Exec.CommandToken.ToString() -> string!
 override Neotales.IO.SimpleTeeTextWriter.Dispose(bool disposing) -> void
@@ -562,8 +529,6 @@ override Neotales.Options.ValueOption<T>.Equals(object? obj) -> bool
 override Neotales.Options.ValueOption<T>.GetHashCode() -> int
 override Neotales.Results.Error.ToString() -> string!
 override Neotales.Results.Error<T>.ToString() -> string!
-static Neotales.Collections.Generic.Inputs.Empty.get -> Neotales.Collections.Generic.Inputs!
-static Neotales.Collections.Generic.Outputs.Empty.get -> Neotales.Collections.Generic.Outputs!
 static Neotales.Env.AppendPath(string! path, System.EnvironmentVariableTarget target = System.EnvironmentVariableTarget.Process) -> void
 static Neotales.Env.Expand(System.ReadOnlySpan<char> template, Neotales.EnvExpandOptions? options = null) -> System.ReadOnlySpan<char>
 static Neotales.Env.Expand(string! template, Neotales.EnvExpandOptions? options = null) -> string!
@@ -836,10 +801,6 @@ static Neotales.Text.Extras.StringBuilderExtensions.ToArray(this System.Text.Str
 static Neotales.Text.StringBuilderCache.Acquire(int capacity = 16) -> System.Text.StringBuilder!
 static Neotales.Text.StringBuilderCache.GetStringAndRelease(System.Text.StringBuilder! sb) -> string!
 static Neotales.Text.StringBuilderCache.Release(System.Text.StringBuilder! sb) -> void
-virtual Neotales.Collections.Generic.Inputs.IsEmpty.get -> bool
-virtual Neotales.Collections.Generic.Inputs.IsReadOnly.get -> bool
-virtual Neotales.Collections.Generic.Outputs.IsEmpty.get -> bool
-virtual Neotales.Collections.Generic.Outputs.IsReadOnly.get -> bool
 virtual Neotales.Results.ResultException.FilePath.get -> string!
 virtual Neotales.Results.ResultException.FilePath.set -> void
 virtual Neotales.Results.ResultException.LineNumber.get -> int

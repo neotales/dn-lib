@@ -3,7 +3,7 @@ using Neotales.Collections.Generic;
 namespace Neotales.Collections.Tests
 {
 
-    public class MapAndInputs_Tests
+    public class Map_Tests
     {
         [Fact]
         public void Map_AddTuple_AddsKeyValue()
@@ -36,15 +36,6 @@ namespace Neotales.Collections.Tests
 
             Assert.True(ok);
             Assert.Equal(7, value);
-        }
-
-        [Fact]
-        public void EmptyInputs_Add_Throws()
-        {
-            var inputs = Inputs.Empty;
-
-            Assert.True(inputs.IsReadOnly);
-            Assert.Throws<InvalidOperationException>(() => ((EmptyInputs)inputs).Add("A", 1));
         }
     }
 }
