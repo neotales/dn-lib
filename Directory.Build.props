@@ -22,7 +22,8 @@
       Stable package version and the assembly version. CI builds on dev publish
       0.0.0-build-yyyyMMdd.rN instead. A release tag such as std/vYYYY.M.D-r.N
       publishes this version unchanged; -alpha.N, -beta.N, and -rc.N are appended
-      to it. The area (std, and later extensions, entityframework, ssh, and others)
+      to the package version through ReleaseLabel. The assembly version stays
+      this value. The area (std, and later extensions, entityframework, ssh, and others)
       selects which solution is packed. A project can override Version when it
       ships on its own.
       eng/scripts/bump-version.cs is the editor for this value.

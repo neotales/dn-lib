@@ -4,6 +4,17 @@
     <Authors>Neotales</Authors>
     <Copyright>Copyright (c) Neotales</Copyright>
   </PropertyGroup>
+  <!--
+    ReleaseLabel is the prerelease channel from a tag, such as beta.3.
+    Each project keeps its own Version, which is also the assembly version.
+    The package version is that Version plus the label. An explicit
+    PackageVersion, including a dev-build override, is left alone.
+    VersionSuffix is not used: an explicit Version ignores it, so a
+    prerelease tag would pack the stable version.
+  -->
+  <PropertyGroup Condition="'$(ReleaseLabel)' != '' and '$(PackageVersion)' == ''">
+    <PackageVersion>$(Version)-$(ReleaseLabel)</PackageVersion>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(IsPackable)' == 'true'">
     <PackageId>$(AssemblyName)</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

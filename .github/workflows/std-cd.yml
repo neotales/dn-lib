@@ -13,7 +13,9 @@
 # skip_nuget_org.
 #
 # Each project keeps its own Version. A stable -r.N tag packs those versions
-# unchanged. -alpha.N, -beta.N, and -rc.N are appended as a version suffix.
+# unchanged. -alpha.N, -beta.N, and -rc.N are passed as ReleaseLabel, which
+# sets PackageVersion to that project's Version plus the label. VersionSuffix
+# does not: an explicit Version ignores it and the package stays stable.
 # Packages already on a feed at that id and version are left there:
 # dotnet nuget push --skip-duplicate treats the 409 as a warning. A package
 # that changed still needs a new version; the feed will not replace one.
@@ -107,14 +109,8 @@ jobs:
       - name: Pack
         env:
           SOLUTION: ${{ steps.package_version.outputs.solution }}
-          VERSION_LABEL: ${{ steps.package_version.outputs.label }}
-        run: |
-          set -euo pipefail
-          if [ -n "${VERSION_LABEL}" ]; then
-            dotnet pack "$SOLUTION" -c Release --no-build -p:VersionSuffix="$VERSION_LABEL"
-          else
-            dotnet pack "$SOLUTION" -c Release --no-build
-          fi
+          RELEASE_LABEL: ${{ steps.package_version.outputs.label }}
+        run: dotnet pack "$SOLUTION" -c Release --no-build -p:ReleaseLabel="$RELEASE_LABEL"
 
       - name: Upload packages
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

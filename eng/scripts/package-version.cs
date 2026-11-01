@@ -4,9 +4,13 @@
 
 // CI builds use 0.0.0-build-yyyyMMdd.rN. A release tag names an area and a
 // channel: std/vYYYY.M.D-r.N publishes the assembly version unchanged, and
-// -alpha.N, -beta.N, or -rc.N is appended. Further areas use the same shape,
-// for example extensions, entityframework, and ssh.
+// -alpha.N, -beta.N, or -rc.N is appended to the package version. Further
+// areas use the same shape, for example extensions, entityframework, and ssh.
+// The check packs Neotales.Core and reads the nuspec, because an explicit
+// Version ignores VersionSuffix and the string helper cannot see that.
+using System.Diagnostics;
 using System.Globalization;
+using System.IO.Compression;
 using System.Text.RegularExpressions;
 
 return Run(args);
@@ -176,6 +180,140 @@ static void Check()
     ExpectThrow(() => CiVersion("20261301", "1"));
     ExpectThrow(() => CiVersion("20261031", "0"));
     _ = AssemblyVersion(ReadAssemblyVersion());
+    CheckPackedPackageVersion();
+}
+
+static void CheckPackedPackageVersion()
+{
+    var root = FindRepositoryRoot();
+    var project = Path.Combine(root, "std", "Core", "src", "Neotales.Core.csproj");
+    if (!File.Exists(project))
+    {
+        throw new InvalidOperationException($"expected packable project {project}.");
+    }
+
+    ExpectPacked(root, project, "beta.3", null, null, "0.0.0-beta.3");
+    ExpectPacked(root, project, "rc.1", "1.2.3", null, "1.2.3-rc.1");
+    ExpectPacked(root, project, "beta.3", null, "9.9.9", "9.9.9");
+    ExpectPacked(root, project, null, null, null, "0.0.0", "beta.3");
+}
+
+static void ExpectPacked(
+    string root,
+    string project,
+    string? label,
+    string? version,
+    string? packageVersion,
+    string expected,
+    string? versionSuffix = null)
+{
+    var output = Directory.CreateTempSubdirectory("dn-lib-pack-");
+    try
+    {
+        var start = new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            WorkingDirectory = root,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+        };
+        start.ArgumentList.Add("pack");
+        start.ArgumentList.Add(project);
+        start.ArgumentList.Add("--nologo");
+        start.ArgumentList.Add("-c");
+        start.ArgumentList.Add("Release");
+        start.ArgumentList.Add("-o");
+        start.ArgumentList.Add(output.FullName);
+        if (label is not null)
+        {
+            start.ArgumentList.Add("-p:ReleaseLabel=" + label);
+        }
+
+        if (version is not null)
+        {
+            start.ArgumentList.Add("-p:Version=" + version);
+        }
+
+        if (packageVersion is not null)
+        {
+            start.ArgumentList.Add("-p:PackageVersion=" + packageVersion);
+        }
+
+        if (versionSuffix is not null)
+        {
+            start.ArgumentList.Add("-p:VersionSuffix=" + versionSuffix);
+        }
+
+        using var process = Process.Start(start) ?? throw new InvalidOperationException("dotnet pack did not start.");
+        var stdout = process.StandardOutput.ReadToEndAsync();
+        var stderr = process.StandardError.ReadToEndAsync();
+        process.WaitForExit();
+        if (process.ExitCode != 0)
+        {
+            throw new InvalidOperationException(
+                $"dotnet pack failed ({process.ExitCode}).{Environment.NewLine}{stdout.GetAwaiter().GetResult()}{stderr.GetAwaiter().GetResult()}");
+        }
+
+        _ = stdout.GetAwaiter().GetResult();
+        _ = stderr.GetAwaiter().GetResult();
+
+        string? nupkg = null;
+        foreach (var path in Directory.EnumerateFiles(output.FullName, "*.nupkg"))
+        {
+            if (path.EndsWith(".snupkg", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            nupkg = path;
+            break;
+        }
+
+        if (nupkg is null)
+        {
+            throw new InvalidOperationException($"dotnet pack wrote no nupkg to {output.FullName}.");
+        }
+
+        var actual = ReadNuspecVersion(nupkg);
+        if (!string.Equals(actual, expected, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"expected package version {expected}, nuspec has {actual}.");
+        }
+    }
+    finally
+    {
+        output.Delete(recursive: true);
+    }
+}
+
+static string ReadNuspecVersion(string nupkg)
+{
+    using var archive = ZipFile.OpenRead(nupkg);
+    ZipArchiveEntry? entry = null;
+    foreach (var candidate in archive.Entries)
+    {
+        if (candidate.FullName.EndsWith(".nuspec", StringComparison.OrdinalIgnoreCase))
+        {
+            entry = candidate;
+            break;
+        }
+    }
+
+    if (entry is null)
+    {
+        throw new InvalidOperationException($"nupkg {nupkg} has no nuspec.");
+    }
+
+    using var reader = new StreamReader(entry.Open());
+    var xml = reader.ReadToEnd();
+    var match = Regex.Match(xml, "<version>([^<]+)</version>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+    if (!match.Success)
+    {
+        throw new InvalidOperationException($"nuspec in {nupkg} has no version.");
+    }
+
+    return match.Groups[1].Value;
 }
 
 static void Expect(string actual, string expected)
