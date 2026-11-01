@@ -21,6 +21,17 @@
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  <!--
+    Shipped libraries are trimmable. Test projects and the eng scripts are not
+    libraries, and this group runs after the test project clears IsPackable.
+    IsTrimmable turns on the trim analyzer for the library itself.
+  -->
+  <PropertyGroup Condition="'$(IsPackable)' == 'true' and '$(IsTestProject)' != 'true'">
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and '$(IsTestProject)' != 'true'">
+    <AssemblyMetadata Include="IsTrimmable" Value="True" />
+  </ItemGroup>
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />

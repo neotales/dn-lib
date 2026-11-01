@@ -10,9 +10,7 @@
       namespace in a move.
     -->
     <RootNamespace>Neotales</RootNamespace>
-    <Description>The runtime primitives the other packages build on: environment variable reading and expansion, result and option types, ordered maps, tee writers, disposable temporary files, and the unix file system interop.
-It is a library of building blocks with no configuration store, no dependency injection container and no async task runner of its own.
-It does not resolve configuration files, and it does not manage a process.</Description>
+    <Description>Core primitives for other Neotales libraries: results, options, environment expansion, ordered maps, command-line tokens, file helpers, and small extension members.</Description>
     <PackageTags>std core primitives result option environment collections interop dotnet</PackageTags>
   </PropertyGroup>
 
