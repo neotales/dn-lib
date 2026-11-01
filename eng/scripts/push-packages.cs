@@ -150,7 +150,7 @@ static string Required(string name)
     {
         throw new InvalidOperationException(
             name == "NUGET_API_KEY"
-                ? "NUGET_API_KEY is not set. Set the secret, or set SKIP_NUGET_ORG=true."
+                ? "NUGET_API_KEY is not set. std-cd.yml gets it from NuGet trusted publishing, or set SKIP_NUGET_ORG=true."
                 : $"{name} is required.");
     }
 

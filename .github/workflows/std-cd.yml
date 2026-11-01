@@ -6,6 +6,9 @@
 # The area selects std.slnx.
 #
 # CD means pushing to NuGet. GitHub Packages always receives the push.
+# nuget.org uses trusted publishing. The job runs in the production
+# environment, which is the environment on the neotales_std_publish policy.
+# NuGet/login exchanges the GitHub OIDC token for a one-hour API key.
 # nuget.org is skipped when SKIP_NUGET_ORG is true or the manual run sets
 # skip_nuget_org.
 #
@@ -35,6 +38,7 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
 
 concurrency:
   group: std-cd-${{ github.ref }}
@@ -51,6 +55,7 @@ jobs:
     name: publish
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    environment: production
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -125,9 +130,18 @@ jobs:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: dotnet ./eng/scripts/push-packages.cs github .artifacts/packages
 
+      - name: NuGet login
+        id: nuget_login
+        if: vars.SKIP_NUGET_ORG != 'true' && (github.event_name != 'workflow_dispatch' || inputs.skip_nuget_org == false)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          # nuget.org profile that created neotales_std_publish. The login
+          # action matches the policy creator.
+          user: neotales
+
       - name: Publish to nuget.org
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
           SKIP_NUGET_ORG: ${{ vars.SKIP_NUGET_ORG }}
           SKIP_NUGET_ORG_INPUT: ${{ github.event_name == 'workflow_dispatch' && inputs.skip_nuget_org && 'true' || 'false' }}
         run: |
