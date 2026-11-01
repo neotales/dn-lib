@@ -73,10 +73,12 @@ jobs:
             echo "No solution ${solution} for area ${area}."
             exit 1
           fi
-          echo "area=${area}" >> "$GITHUB_OUTPUT"
-          echo "version=${version}" >> "$GITHUB_OUTPUT"
-          echo "label=${label}" >> "$GITHUB_OUTPUT"
-          echo "solution=${solution}" >> "$GITHUB_OUTPUT"
+          {
+            echo "area=${area}"
+            echo "version=${version}"
+            echo "label=${label}"
+            echo "solution=${solution}"
+          } >> "$GITHUB_OUTPUT"
           echo "${area} ${version}"
 
       - name: Restore
