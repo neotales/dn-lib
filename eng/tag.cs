@@ -29,7 +29,7 @@ static int Run(string[] args)
         }
 
         Console.WriteLine("""
-            usage: eng/tag.cs [--suffix|-s r|alpha|beta|rc] [--group NAME] [--date YYYY-MM-DD] [--remote URL] [--ref REF] [--push] [--dry-run]
+            usage: eng/tag.cs [--suffix|-s r|alpha|beta|rc] [--group std] [--date YYYY-MM-DD] [--remote URL] [--ref REF] [--push] [--dry-run]
                    eng/tag.cs check
 
             The date is today, UTC. No suffix means a release, r.N. The revision
@@ -60,7 +60,7 @@ static int Run(string[] args)
 static int Create(string[] args)
 {
     var suffix = Optional(args, "suffix", "s") ?? "r";
-    var group = Optional(args, "group") ?? "core";
+    var group = Optional(args, "group") ?? "std";
     var date = ParseDate(Optional(args, "date"));
     var remote = Optional(args, "remote") ?? "git@github.com:neotales/dn-lib.git";
     var reference = Optional(args, "ref") ?? "dev";
