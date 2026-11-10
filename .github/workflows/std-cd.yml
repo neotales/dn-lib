@@ -1,16 +1,17 @@
-# Publish Neotales.Core. One tag, core/vYYYY.M.D-<channel>, publishes this
-# group and nothing else. The name is dn-core-cd so it does not clash with
-# another runtime's workflow.
-name: dn-core-cd
+# Publish the std area. The tag date is not the package version: r.N packs
+# Version unchanged, and alpha.N, beta.N, or rc.N is ReleaseLabel. The file
+# name is std-cd.yml so it matches the nuget.org trusted publishing policy
+# neotales_std_publish.
+name: dn-std-cd
 
 on:
   push:
     tags:
-      - "core/v[0-9]*"
+      - "std/v[0-9]*"
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example core/v2026.11.10-r.1
+        description: Release tag, for example std/v2026.11.10-alpha.1
         required: true
         type: string
 
@@ -20,7 +21,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: dn-core-cd-${{ github.ref }}
+  group: dn-std-cd-${{ github.ref }}
   cancel-in-progress: false
 
 env:
@@ -32,7 +33,7 @@ env:
 
 jobs:
   publish:
-    name: dn-core-cd
+    name: dn-std-cd
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     environment: production
@@ -55,16 +56,13 @@ jobs:
           RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
-          tag="${RELEASE_TAG#core/v}"
-          version="${tag%%-*}"
-          label="${tag#${version}}"
-          label="${label#-}"
-          if [[ "$label" == r.* || -z "$label" ]]; then
-            package="$version"
+          tag="${RELEASE_TAG#std/v}"
+          label="${tag#*-}"
+          if [[ "$tag" != *-* || "$label" == r.* || -z "$label" ]]; then
+            echo "release_label=" >> "$GITHUB_OUTPUT"
           else
-            package="${version}-${label}"
+            echo "release_label=${label}" >> "$GITHUB_OUTPUT"
           fi
-          echo "package=${package}" >> "$GITHUB_OUTPUT"
 
       - name: Restore
         run: dotnet restore lib.slnx --locked-mode
@@ -77,8 +75,14 @@ jobs:
 
       - name: Pack
         env:
-          PACKAGE_VERSION: ${{ steps.package_version.outputs.package }}
-        run: dotnet pack lib.slnx -c Release --no-build -p:PackageVersion="$PACKAGE_VERSION"
+          RELEASE_LABEL: ${{ steps.package_version.outputs.release_label }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$RELEASE_LABEL" ]]; then
+            dotnet pack lib.slnx -c Release --no-build -p:ReleaseLabel="$RELEASE_LABEL"
+          else
+            dotnet pack lib.slnx -c Release --no-build
+          fi
 
       - name: Publish to GitHub Packages
         env:

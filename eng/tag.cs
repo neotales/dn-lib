@@ -11,7 +11,7 @@
 //   dotnet eng/tag.cs -s alpha --dry-run
 //   dotnet eng/tag.cs --push
 //
-// --push sends the tag to the satellite. That starts dn-core-cd. A tag on the
+// --push sends the tag to the satellite. That starts dn-std-cd. A tag on the
 // plab repository does not.
 using System.Diagnostics;
 using System.Globalization;
