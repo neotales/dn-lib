@@ -4,6 +4,8 @@
 
 `lib.slnx` is the solution. Restore and build it with the .NET SDK. Do not add a second solution at this root for the same projects.
 
+`cmn/src` is shared source. A package compiles the files it needs through explicit links. Do not turn `cmn` into a runtime assembly. Tests for that source live in the consuming package.
+
 `dev` is the integration branch. Do not create `main` or `master`.
 
 This directory is published from plab with Copybara. The satellite is a copy, not the place a change starts. Make the change under `dn/lib` in plab, then export the commits that touched that path. Do not force-push `neotales/dn-lib` to replace that history.

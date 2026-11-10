@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsTestProject>true</IsTestProject>
+    <TargetFramework>$(Fx)</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Analyzer exceptions">
+    <!--
+      Test project specific, and every rule here is about the tests rather than
+      the code under test.
+
+        CA1707          the underscores in a test method name;
+                        Method_Scenario_Expectation is what makes a failure readable.
+        IDE0005         reported on build only when GenerateDocumentationFile is on,
+                        and a test assembly ships no XML documentation.
+        IDE0130         a test namespace mirrors the namespace under test, not the
+                        folder it sits in, so that a failing test names the subject.
+        IDE0028, CA1859,
+        CA1861, CA1834  the analyzer would change a test fixture into something
+                        that reads worse in a stack trace. Tests are written for the
+                        person reading the failure.
+        CA2201          the tests deliberately pass reserved type names such as
+                        `Exception` to the overload resolution helpers.
+    -->
+    <NoWarn>$(NoWarn);CA1707;CA1834;CA1859;CA1861;CA2201;IDE0005;IDE0028;IDE0130</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../src/Neotales.Core.csproj" />
+  </ItemGroup>
+
+</Project>
