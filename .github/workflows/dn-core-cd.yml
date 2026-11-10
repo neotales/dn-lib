@@ -1,0 +1,107 @@
+# Publish Neotales.Core. One tag, core/vYYYY.M.D-<channel>, publishes this
+# group and nothing else. The name is dn-core-cd so it does not clash with
+# another runtime's workflow.
+name: dn-core-cd
+
+on:
+  push:
+    tags:
+      - "core/v[0-9]*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, for example core/v2026.11.10-r.1
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+concurrency:
+  group: dn-core-cd-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget
+  CI: "true"
+
+jobs:
+  publish:
+    name: dn-core-cd
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
+
+      - name: Install the pinned SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+        env:
+          DOTNET_INSTALL_DIR: ${{ github.workspace }}/.dotnet
+
+      - name: Package version
+        id: package_version
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          tag="${RELEASE_TAG#core/v}"
+          version="${tag%%-*}"
+          label="${tag#${version}}"
+          label="${label#-}"
+          if [[ "$label" == r.* || -z "$label" ]]; then
+            package="$version"
+          else
+            package="${version}-${label}"
+          fi
+          echo "package=${package}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore
+        run: dotnet restore lib.slnx --locked-mode
+
+      - name: Build
+        run: dotnet build lib.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test lib.slnx -c Release --no-build
+
+      - name: Pack
+        env:
+          PACKAGE_VERSION: ${{ steps.package_version.outputs.package }}
+        run: dotnet pack lib.slnx -c Release --no-build -p:PackageVersion="$PACKAGE_VERSION"
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          dotnet nuget push .artifacts/packages/*.nupkg \
+            --source "https://nuget.pkg.github.com/neotales/index.json" \
+            --api-key "$GITHUB_TOKEN" \
+            --skip-duplicate
+
+      - name: NuGet login
+        id: nuget_login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: neotales
+
+      - name: Publish to nuget.org
+        env:
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          dotnet nuget push .artifacts/packages/*.nupkg \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "$NUGET_API_KEY" \
+            --skip-duplicate
