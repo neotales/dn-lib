@@ -1,0 +1,16 @@
+<Project>
+  <!--
+    Scripts in this directory are not packages. Stop the search here so the
+    library Directory.Build.props above does not make a file-based script
+    packable or centrally versioned.
+  -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <NuGetAudit>false</NuGetAudit>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

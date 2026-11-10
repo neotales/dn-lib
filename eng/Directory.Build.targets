@@ -1,0 +1,6 @@
+<Project>
+  <!--
+    Stop the search here. The library targets above would add StyleCop and
+    pack metadata to a script that is not a package.
+  -->
+</Project>
