@@ -16,9 +16,9 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[11.0.0-rc.2.26504.105, )",
-        "resolved": "11.0.0-rc.2.26504.105",
-        "contentHash": "Mkb6kHfPr4/txc4n/41yUiEBT44Haup2qnyecIO1ADo2QB4YxleZHsOvgYJT6roL1SNuFSpbeNpoe70BJ953Uw=="
+        "requested": "[11.0.0, )",
+        "resolved": "11.0.0",
+        "contentHash": "gK2aq4XvChj5kvozpPHrkfKkr7zc5Z4xoTrJb4GPZzDEPMlCk0TX632bwY3LsWcX2UVcVRQBBGzsBGC2lq6YhA=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
