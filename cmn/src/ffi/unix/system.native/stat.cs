@@ -1,38 +1,74 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 using System.Runtime.InteropServices;
 
-#pragma warning disable CS0649, SA1025, SA1300, SA1310, S3903
+using Microsoft.Win32.SafeHandles;
+
+#pragma warning disable IDE1006, SA1025, SA1310, CS8981, SA1300
 
 /// <summary>
-/// Unix file status, read through libc rather than through a runtime shim.
+/// The portable unix interop declarations, in the global namespace so a linking
+/// project can drop them in without a name collision.
 /// </summary>
 internal static partial class FFI
 {
-    /// <summary>The status calls and the managed record they fill.</summary>
+    /// <summary>
+    /// The System.Native shim calls this assembly uses, and the <c>stat</c> layout
+    /// they return.
+    /// </summary>
     internal static partial class Sys
     {
-        /// <summary>Reads the status of a path, following a final symbolic link.</summary>
-        /// <param name="path">The path to read.</param>
+        /// <summary>
+        /// The fields of <see cref="FileStatus"/> the platform may or may not fill in.
+        /// </summary>
+        [Flags]
+        internal enum FileStatusFlags
+        {
+            /// <summary>No optional field was filled in.</summary>
+            None = 0,
+
+            /// <summary>The birth time was filled in, which older kernels do not do.</summary>
+            HasBirthTime = 1,
+        }
+
+        /// <summary>Reads the status of an already open file.</summary>
+        /// <param name="fd">The handle to read.</param>
         /// <param name="output">The status the call returns.</param>
         /// <returns>Zero on success, or <c>-1</c> with the errno set.</returns>
-        internal static int stat(string path, out FileStatus output)
-        {
-            return Read(path, follow: true, out output);
-        }
+        [LibraryImport(Libs.SystemNative, EntryPoint = "SystemNative_FStat", SetLastError = true)]
+        internal static partial int fstat(SafeFileHandle fd, out FileStatus output);
+
+        /// <summary>Reads the status of a path, following symbolic links.</summary>
+        /// <param name="path">The path to read, as UTF-8.</param>
+        /// <param name="output">The status the call returns.</param>
+        /// <returns>Zero on success, or <c>-1</c> with the errno set.</returns>
+        [LibraryImport(Libs.SystemNative, EntryPoint = "SystemNative_Stat", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        internal static partial int stat(string path, out FileStatus output);
 
         /// <summary>Reads the status of a path, without following a final symbolic link.</summary>
-        /// <param name="path">The path to read.</param>
+        /// <param name="path">The path to read, as UTF-8.</param>
         /// <param name="output">The status the call returns.</param>
         /// <returns>Zero on success, or <c>-1</c> with the errno set.</returns>
-        internal static int lstat(string path, out FileStatus output)
-        {
-            return Read(path, follow: false, out output);
-        }
+        [LibraryImport(Libs.SystemNative, EntryPoint = "SystemNative_LStat", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        internal static partial int lstat(string path, out FileStatus output);
+
+        // Even though csc will by default use a sequential layout, a CS0649 warning as error
+        // is produced for un-assigned fields when no StructLayout is specified.
+        //
+        // Explicitly saying Sequential disables that warning/error for consumers which only
+        // use Stat in debug builds.
 
         /// <summary>
-        /// The file type and permission bits, ownership, size, times, device, and inode.
+        /// The native <c>struct stat</c>, with the shim's extra fields appended.
         /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
         internal struct FileStatus
         {
+            /// <summary>Which optional fields the platform filled in.</summary>
+            internal FileStatusFlags Flags;
+
             /// <summary>The file type and permission bits.</summary>
             internal int Mode;
 
@@ -48,78 +84,62 @@ internal static partial class FFI
             /// <summary>The last access time, in seconds since the unix epoch.</summary>
             internal long ATime;
 
+            /// <summary>The nanosecond part of the last access time.</summary>
+            internal long ATimeNsec;
+
             /// <summary>The last write time, in seconds since the unix epoch.</summary>
             internal long MTime;
+
+            /// <summary>The nanosecond part of the last write time.</summary>
+            internal long MTimeNsec;
 
             /// <summary>The last metadata change time, in seconds since the unix epoch.</summary>
             internal long CTime;
 
-            /// <summary>The creation time, when the platform has one. Otherwise zero.</summary>
+            /// <summary>The nanosecond part of the last metadata change time.</summary>
+            internal long CTimeNsec;
+
+            /// <summary>The creation time, in seconds since the unix epoch.</summary>
             internal long BirthTime;
+
+            /// <summary>The nanosecond part of the creation time.</summary>
+            internal long BirthTimeNsec;
 
             /// <summary>The device the entry lives on.</summary>
             internal long Dev;
 
             /// <summary>The inode number.</summary>
             internal long Ino;
+
+            /// <summary>Platform specific user flags.</summary>
+            internal uint UserFlags;
         }
 
-        private static int Read(string path, bool follow, out FileStatus output)
+        /// <summary>
+        /// The file type bits of the mode field of <see cref="FileStatus"/>.
+        /// </summary>
+        internal static class FileTypes
         {
-            output = default;
-            int rc = follow ? LibcStat(path, out NativeStat native) : LibcLStat(path, out native);
-            if (rc != 0)
-            {
-                return -1;
-            }
+            /// <summary>The mask that selects the file type bits.</summary>
+            internal const int S_IFMT = 0xF000;
 
-            output = new FileStatus
-            {
-                Mode = native.Mode,
-                Uid = native.Uid,
-                Gid = native.Gid,
-                Size = native.Size,
-                ATime = native.AccessSeconds,
-                MTime = native.ModifySeconds,
-                CTime = native.ChangeSeconds,
-                BirthTime = 0,
-                Dev = native.Dev,
-                Ino = native.Ino,
-            };
-            return 0;
+            /// <summary>A named pipe.</summary>
+            internal const int S_IFIFO = 0x1000;
+
+            /// <summary>A character device.</summary>
+            internal const int S_IFCHR = 0x2000;
+
+            /// <summary>A directory.</summary>
+            internal const int S_IFDIR = 0x4000;
+
+            /// <summary>A regular file.</summary>
+            internal const int S_IFREG = 0x8000;
+
+            /// <summary>A symbolic link.</summary>
+            internal const int S_IFLNK = 0xA000;
+
+            /// <summary>A socket.</summary>
+            internal const int S_IFSOCK = 0xC000;
         }
-
-        // glibc's struct stat on linux-x64. Field order is the public ABI, not a
-        // runtime shim. Times are timespec: seconds then nanoseconds.
-        [StructLayout(LayoutKind.Sequential)]
-        private struct NativeStat
-        {
-            internal long Dev;
-            internal long Ino;
-            internal long NLink;
-            internal int Mode;
-            internal uint Uid;
-            internal uint Gid;
-            internal int Pad0;
-            internal long RDev;
-            internal long Size;
-            internal long BlockSize;
-            internal long Blocks;
-            internal long AccessSeconds;
-            internal long AccessNanos;
-            internal long ModifySeconds;
-            internal long ModifyNanos;
-            internal long ChangeSeconds;
-            internal long ChangeNanos;
-            internal long Reserved0;
-            internal long Reserved1;
-            internal long Reserved2;
-        }
-
-        [LibraryImport(Libs.LibcName, EntryPoint = "stat", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        private static partial int LibcStat(string path, out NativeStat output);
-
-        [LibraryImport(Libs.LibcName, EntryPoint = "lstat", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        private static partial int LibcLStat(string path, out NativeStat output);
     }
 }

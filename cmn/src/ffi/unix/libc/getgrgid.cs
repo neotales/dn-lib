@@ -23,7 +23,7 @@ internal static partial class FFI
         /// The record the platform actually used, which is a null pointer when there
         /// is no such group.
         /// </param>
-        /// <returns>Zero on success, or a non-zero errno.</returns>
+        /// <returns>Zero on success, or an <see cref="FFI.Error"/> value.</returns>
         [LibraryImport(Libs.LibcName, StringMarshalling = StringMarshalling.Utf8, EntryPoint = "getgrgid_r", SetLastError = false)]
         internal static unsafe partial int getgrgidr(uint uid, out Group group, byte* buf, int bufLen, out IntPtr groupPtr);
 
@@ -36,7 +36,7 @@ internal static partial class FFI
         /// The record the platform actually used, which is a null pointer when there
         /// is no such group.
         /// </param>
-        /// <returns>Zero on success, or a non-zero errno.</returns>
+        /// <returns>Zero on success, or an <see cref="FFI.Error"/> value.</returns>
         [LibraryImport(Libs.LibcName, StringMarshalling = StringMarshalling.Utf8, EntryPoint = "getgrnam_r", SetLastError = false)]
         internal static unsafe partial int getgrnamr(string name, out Group group, byte* buf, int bufLen, out IntPtr groupPtr);
 
