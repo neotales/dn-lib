@@ -98,7 +98,8 @@ jobs:
         id: nuget_login
         uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
-          user: neotales
+          # nuget.org profile that created neotales_std_publish. Not the package owner.
+          user: nuget_neotales
 
       - name: Publish to nuget.org
         env:
