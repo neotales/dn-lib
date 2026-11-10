@@ -1,6 +1,6 @@
 # Publish the std area. The tag date is not the package version: r.N packs
 # Version unchanged, and alpha.N, beta.N, or rc.N is ReleaseLabel. The file
-# name is std-cd.yml so it matches the nuget.org trusted publishing policy
+# name is dn-std-cd.yml so it matches the nuget.org trusted publishing policy
 # neotales_std_publish.
 name: dn-std-cd
 
