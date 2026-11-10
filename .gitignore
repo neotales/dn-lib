@@ -1,0 +1,50 @@
+# Build output. Never commit these.
+**/bin/
+**/obj/
+.artifacts/
+*.nupkg
+*.snupkg
+TestResults/
+
+# NuGet fallback folder and HTTP cache. A packages.lock.json is not this.
+.nuget/
+packages/
+
+# Editor noise. `.vscode` itself is allowed: this directory is the root of the
+# published repository, so committed editor settings, `.agents`, and `.github`
+# belong here and are exported. Only the uncommitted noise is ignored.
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.vs/
+*.user
+*.suo
+*.swp
+*.swo
+*~
+
+# Operating system noise.
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local environment and credentials. A token in a committed file is a published
+# token. Do not add a blanket *.key or *.pem rule: that has hidden a test
+# fixture a build needed. Except a real secret by name when one exists.
+.env
+.env.*
+!.env.example
+
+# Coverage output.
+coverage/
+*.coverage
+*.coveragexml
+
+# Python bytecode from a script, if one is added later.
+__pycache__/
+*.pyc
+
+# Another agent's local session files. A git add -A has committed these before.
+.agentsroom/
+.claude/
